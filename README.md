@@ -15,7 +15,7 @@ Algoritmeja testataan eri **verkoissa** ja mitataan **nopeutta**
 - Käyttöohje
 
 # Viikkopalautukset:
-- [Viikko1]()
+- [Viikko1](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/viikkopalautukset/viikko1.md)
 - Viikko2
 - Viikko3
 - Viikko4
