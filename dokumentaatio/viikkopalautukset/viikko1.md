@@ -13,9 +13,9 @@
 - Olen tutustunut tkinteriin ~5h ja opittu siitä paljon
 
 ## Vaikeuksia:
-- Käyttöliittymän suunnittelussa, mutta olen tooiveikais oppivani tarvittavat taidot, jotta saan haluamani näkymän esiin.
+- Käyttöliittymän suunnittelussa, mutta olen toiveikais oppivani tarvittavat taidot, jotta saan haluamani näkymän esiin.
 - Kannattaisikohan minun ensin tehdä käyttöliittymä vai toimiva algoritmi, joka esim tulostaa vastauksia terminaalissa?
 
 ## Seuraavan viikon tavoite:
-- Alustan algoritmia ja troivottavasti saan yhden toimivaan kuntoon
+- Alustan algoritmia ja toivottavasti saan yhden toimivaan kuntoon
 - Koitan tehdä käyttöliittymää parempaan kuosiin
