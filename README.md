@@ -13,6 +13,7 @@ Algoritmeja testataan eri **verkoissa** ja mitataan **nopeutta**
 - Toteutusdokumentti
 - Testausdokumentti
 - Käyttöohje
+- [Työaikakirjanpito](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
 # Viikkopalautukset:
 - [Viikko1](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/viikkopalautukset/viikko1.md)
