@@ -9,7 +9,7 @@ Tarkoituksena on rakentaa:
 Algoritmeja testataan eri **verkoissa** ja mitataan **nopeutta**
 
 ## Dokumentaatio
-- Määrittelydokumentti
+- [Määrittelydokumentti](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/maarittely.md)
 - Toteutusdokumentti
 - Testausdokumentti
 - Käyttöohje
