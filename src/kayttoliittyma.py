@@ -9,14 +9,10 @@ class UserInterface:
     def start(self):
         self._map_screen()
     
-    def _handle_finding_route(self, value1):
-        print("Reitti löytyi ajassa:")
-        print(value1)
 
     def _map_screen(self):
         self._current_view = KarttaRuutu(
             self._root,
-            self._handle_finding_route
         )
 
         self._current_view.pack()
