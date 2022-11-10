@@ -1,6 +1,7 @@
 from tkinter import Tk
 from karttaruutu import KarttaRuutu
 
+
 class UserInterface:
     def __init__(self, root):
         self._root = root
@@ -8,7 +9,6 @@ class UserInterface:
 
     def start(self):
         self._map_screen()
-    
 
     def _map_screen(self):
         self._current_view = KarttaRuutu(
@@ -16,6 +16,7 @@ class UserInterface:
         )
 
         self._current_view.pack()
+
 
 window = Tk()
 window.title("Reitinhaku")
