@@ -22,3 +22,4 @@ Algoritmeja testataan eri **verkoissa** ja mitataan **nopeutta**
 - Viikko4
 - Viikko5
 - Viikko6
+- Viikko7
