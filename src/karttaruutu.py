@@ -31,6 +31,9 @@ class KarttaRuutu:
         color1 = 0
         color2 = 0
 
+        start1 = ""
+        start2 = ""
+
         for i in range(40, 401, 40):
             for j in range(40, 401, 40):
                 if show_map[color1][color2] == "o":
@@ -41,6 +44,8 @@ class KarttaRuutu:
                                ) == self.x_y_list[0] and str(color2) == self.x_y_list[1]:
                             self.canvas.create_rectangle(
                                 j, i, j+40, i+40, fill="blue")
+                            start1 += str(color1)
+                            start2 += str(color2)
                         if str(color1
                                ) == self.x_y_list[2] and str(color2) == self.x_y_list[3]:
                             self.canvas.create_rectangle(
@@ -53,7 +58,7 @@ class KarttaRuutu:
             color2 = 0
         self.canvas.pack(padx=0, pady=50)
         if algorithm_number == 1:
-            Dijkstra(map_number).printtaa(map_number)
+            Dijkstra(map_number).make_nodes(start1, start2)
         return True
 
     def _handle_finding_route(self, value_list, map_number, algorithm_number):
