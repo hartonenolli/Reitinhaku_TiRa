@@ -12,7 +12,7 @@ class UserInterface:
 
     def _map_screen(self):
         self._current_view = KarttaRuutu(
-            self._root,
+            self._root
         )
 
         self._current_view.pack()
