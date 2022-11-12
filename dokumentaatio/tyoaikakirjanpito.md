@@ -15,10 +15,15 @@
 - 3h
 - opiskeltu tkinterin käyttöä
 
+## 8.11
+- 2h
+- Alustettu kartan näkymistä käyttäjälle
+
 ## 9.11
-- 4h
+- 3h
 - Saatu kartta näkymään käyttöliittymässä
-- Voi valöita koordinaatit
+- Voi valita koordinaatit
+- Tehty karttoja
 
 ## 10.11
 - 3h
