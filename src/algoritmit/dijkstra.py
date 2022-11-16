@@ -1,5 +1,5 @@
 from kartat.kartta1 import Kartat
-
+import heapq
 
 class Dijkstra:
     def __init__(self, map_number):
@@ -17,11 +17,26 @@ class Dijkstra:
                     self.nodes[f"{i},{j}"] = 0
                 else:
                     self.nodes[f"{i},{j}"] = 999
-        print(self.nodes)
+        #print(self.nodes)
+        self.algorithim()
 
     def printtaa(self, number):
         print(self.map)
         self.make_nodes()
 
-    def algorithim(self, number):
-        pass
+    def algorithim(self):
+        keko = []
+        heapq.heappush(keko, ("0,0", self.nodes.get("0,0")))
+        print(keko)
+        #while keko != []:
+        solmu = keko.pop()[0]
+        print(solmu)
+        #    if kasitelty[solmu]
+        #        continue
+        #    kasitelty[solmu] = true
+        #    for kaari in verkko[solmu]
+        #        nyky = etaisyys[kaari.loppu]
+        #        uusi = etaisyys[solmu]+kaari.paino
+        #        if uusi < nyky
+        #            etaisyys[kaari.loppu] = uusi
+        #            keko.push((uusi,kaari.loppu))
