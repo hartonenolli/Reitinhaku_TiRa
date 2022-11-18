@@ -10,23 +10,22 @@ class Dijkstra:
         self.cordinates = [0,0,9,9]
         self.map = Kartat().maps(map_number)
     
-    def get_nodes(self):
-        return self.nodes
-    
     def make_nodes(self, start_and_finish):
         self.cordinates = start_and_finish
         for y in range(len(self.map)):
             for x in range(len(self.map[0])):
                 if str(x) == self.cordinates[0] and str(y) == self.cordinates[1]:
                     self.nodes[f"{x},{y}"] = 0
-                    self.neighbours[f"{x},{y}"] = []
+                    #self.neighbours[f"{x},{y}"] = []
+                    self.make_neighbour(x,y)
                 elif self.map[y][x] != "p":
                     self.nodes[f"{x},{y}"] = 999
-                    self.neighbours[f"{x},{y}"] = []
-                self.make_neighbour(x,y)
+                    #self.neighbours[f"{x},{y}"] = []
+                    self.make_neighbour(x,y)
         self.algorithim()
 
     def make_neighbour(self, x, y):
+        self.neighbours[f"{x},{y}"] = []
         if self.map[y][x] == "o":
             #Handle different directions
             #left
@@ -45,6 +44,8 @@ class Dijkstra:
             if y < len(self.map)-1:
                 if self.map[y+1][x] != "p":
                     self.neighbours[f"{x},{y}"].append(f"{x},{y+1}")
+            return True
+        return False
 
     def algorithim(self):
         heap = []
@@ -63,3 +64,4 @@ class Dijkstra:
                     self.nodes[next] = new
                     heapq.heappush(heap, (new, next))
         print(self.nodes[target])
+        return(self.nodes[target])
