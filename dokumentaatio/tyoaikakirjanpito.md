@@ -29,3 +29,20 @@
 - 3h
 - Voidaan valita eri karttoja
 - Alustettu algoritmia
+
+## 15.11
+- 1h
+- Dijkstran algoritmin työstöä
+
+## 16.11
+- 1h
+- Dijkstran algoritmia
+
+## 17.11
+- 2h
+- Edetty runsaasti algoritmisa
+
+## 18.11
+- 3h
+- Saatu algoritmi valmiiksi
+- Testien tekemistä
