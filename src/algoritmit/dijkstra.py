@@ -18,23 +18,15 @@ class Dijkstra:
         for y in range(len(self.map)):
             for x in range(len(self.map[0])):
                 if str(x) == self.cordinates[0] and str(y) == self.cordinates[1]:
-                    #print(y, x)
                     self.nodes[f"{x},{y}"] = 0
                     self.neighbours[f"{x},{y}"] = []
-                #else:
                 elif self.map[y][x] != "p":
                     self.nodes[f"{x},{y}"] = 999
                     self.neighbours[f"{x},{y}"] = []
                 self.make_neighbour(x,y)
-        #print(self.nodes)
-        #self.make_neighbour()
-        #self.algorithim()
-        #print(self.neighbours)
         self.algorithim()
 
     def make_neighbour(self, x, y):
-        #for y in range(len(self.map)):
-        #    for x in range(len(self.map[0])):
         if self.map[y][x] == "o":
             #Handle different directions
             #left
@@ -53,40 +45,21 @@ class Dijkstra:
             if y < len(self.map)-1:
                 if self.map[y+1][x] != "p":
                     self.neighbours[f"{x},{y}"].append(f"{x},{y+1}")
-        #print(self.neighbours)
-
-    def printtaa(self, number):
-        print(self.map)
-        self.make_nodes()
 
     def algorithim(self):
-        #print(self.neighbours)
         heap = []
-        heapq.heappush(heap, (f"{self.cordinates[0]},{self.cordinates[1]}", self.nodes.get(f"{self.cordinates[0]},{self.cordinates[1]}")))
-        #print(heap)
+        heapq.heappush(heap, (self.nodes.get(f"{self.cordinates[0]},{self.cordinates[1]}"), f"{self.cordinates[0]},{self.cordinates[1]}"))
         target = f"{self.cordinates[2]},{self.cordinates[3]}"
         while heap != []:
-            #print(heap)
-            #print(min(heap))
             knot = min(heap)
             heap.remove(min(heap))
-            #print(knot[0])
-            #print(self.neighbours.get(knot[0]))
-            if knot[0] in self.visited:
-                #print("visited")
+            if knot[1] in self.visited:
                 continue
-            self.visited.append(knot[0])
-            for next in self.neighbours.get(knot[0]):
-                #print("täällä")
-                #print(self.neighbours.get(knot[0]))
+            self.visited.append(knot[1])
+            for next in self.neighbours.get(knot[1]):
                 now = self.nodes[next]
-                new = self.nodes[knot[0]]+1
-                #print(new, now)
+                new = self.nodes[knot[1]]+1
                 if new < now:
                     self.nodes[next] = new
-                    heapq.heappush(heap, (next, new))
-                    #heap.push((new,next))
-                    #print("mentiin")
-        #print(new)
-        #print(target)
+                    heapq.heappush(heap, (new, next))
         print(self.nodes[target])
