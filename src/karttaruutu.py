@@ -17,7 +17,7 @@ class KarttaRuutu:
 
     def destroy(self):
         self._frame.destroy()
-    
+
     def set_dijkstra(self):
         self.save_dijkstra = 1
 
@@ -47,15 +47,15 @@ class KarttaRuutu:
                 if show_map[color1][color2] == "o":
                     self.canvas.create_rectangle(
                         j, i, j+40, i+40, fill="white")
-                    #if self.x_y_list is not None:
+                    # if self.x_y_list is not None:
                     if str(color1
-                            ) == self.x_y_list[0] and str(color2) == self.x_y_list[1]:
+                           ) == self.x_y_list[0] and str(color2) == self.x_y_list[1]:
                         self.canvas.create_rectangle(
                             j, i, j+40, i+40, fill="blue")
                         start1 += str(color2)
                         start2 += str(color1)
                     if str(color1
-                            ) == self.x_y_list[2] and str(color2) == self.x_y_list[3]:
+                           ) == self.x_y_list[2] and str(color2) == self.x_y_list[3]:
                         self.canvas.create_rectangle(
                             j, i, j+40, i+40, fill="red")
                         finish1 += str(color2)
@@ -70,7 +70,7 @@ class KarttaRuutu:
             color1 += 1
             color2 = 0
         self.canvas.pack(padx=0, pady=50)
-        #if algorithm_number == 1:
+        # if algorithm_number == 1:
         if self.save_dijkstra == 1:
             Dijkstra(map_number).make_nodes([start1, start2, finish1, finish2])
         return True
@@ -82,7 +82,11 @@ class KarttaRuutu:
         self.x_y_list = value_list
         self.set_cordinates_for_canvas(map_number)
 
-    """Alustetaan näkymä."""
+    """Alustetaan näkymä.
+        Tässä asetetaan kaikki elementit paikoilleen.
+        Painamalla Kartta painikkeita saa kartat näkyviin.
+        Painamalla Dijkstra painiketta ennen kartta painiketta
+        aloitetaan reitinhaku algoritmilla."""
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -124,7 +128,7 @@ class KarttaRuutu:
         button_map.grid(row=1, column=1)
 
         button_dijkstra = ttk.Button(master=self._frame,
-                                text="Dijkstra",
-                                command=self.set_dijkstra)
-        
+                                     text="Dijkstra",
+                                     command=self.set_dijkstra)
+
         button_dijkstra.grid(row=1, column=2)
