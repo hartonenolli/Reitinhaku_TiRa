@@ -29,11 +29,12 @@ class KarttaRuutu:
 
     def set_cordinates_for_canvas(self, map_number):
         if self.canvas is not None:
-            self.canvas.after(1000, self.canvas.destroy())
+            self.canvas.after(0, self.canvas.destroy())
         self.canvas = Canvas(self._root, width=500, height=500)
-        if not self.save_dijkstra is None:
-            pass
         show_map = Kartat().maps(map_number)
+        if self.save_dijkstra == 1:
+            make_map = Dijkstra(map_number).make_nodes(self.x_y_list)
+            show_map = Dijkstra(map_number, make_map[0], make_map[1], self.x_y_list).algorithim()
         color1 = 0
         color2 = 0
 
@@ -71,8 +72,8 @@ class KarttaRuutu:
             color2 = 0
         self.canvas.pack(padx=0, pady=50)
         # if algorithm_number == 1:
-        if self.save_dijkstra == 1:
-            Dijkstra(map_number).make_nodes([start1, start2, finish1, finish2])
+        #if self.save_dijkstra == 1:
+        #    Dijkstra(map_number).make_nodes([start1, start2, finish1, finish2])
         return True
 
     def _handle_finding_route(self, value_list, map_number):

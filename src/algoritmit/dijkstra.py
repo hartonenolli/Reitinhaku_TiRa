@@ -10,12 +10,12 @@ class Dijkstra:
         dijkstra_kartta: 
         koordinaatit: aloitus ja lopetuskoordinaatit
         kartta: mitä karttaa käytetään"""
-    def __init__(self, map_number):
-        self.nodes = {}
-        self.neighbours = {}
+    def __init__(self, map_number, nodes = {}, neighbours = {}, cordinates = [0,0,9,9]):
+        self.nodes = nodes
+        self.neighbours = neighbours
         self.visited = []
         self.dijkstra_map = []
-        self.cordinates = [0, 0, 9, 9]
+        self.cordinates = cordinates
         self.map = Kartat().maps(map_number)
 
     """Tehdään nodet käymällä kartta läpi.
@@ -29,7 +29,7 @@ class Dijkstra:
         self.cordinates = start_and_finish
         for y in range(len(self.map)):
             for x in range(len(self.map[0])):
-                if str(x) == self.cordinates[0] and str(y) == self.cordinates[1]:
+                if str(x) == self.cordinates[1] and str(y) == self.cordinates[0]:
                     self.nodes[f"{x},{y}"] = 0
                     #self.neighbours[f"{x},{y}"] = []
                     self.make_neighbour(x, y)
@@ -37,7 +37,8 @@ class Dijkstra:
                     self.nodes[f"{x},{y}"] = 999
                     #self.neighbours[f"{x},{y}"] = []
                     self.make_neighbour(x, y)
-        self.algorithim()
+        #self.algorithim()
+        return self.nodes, self.neighbours
 
     """Käydään kartan ruudulta läpi naapurit
         Tarkastetaan ylös, alas, vasen ja oikea
@@ -72,8 +73,8 @@ class Dijkstra:
         Tarkastellaan pienintä arvoa mitä on maaliruutuun."""
     def algorithim(self):
         heap = []
-        heapq.heappush(heap, (0, f"{self.cordinates[0]},{self.cordinates[1]}"))
-        target = f"{self.cordinates[2]},{self.cordinates[3]}"
+        heapq.heappush(heap, (0, f"{self.cordinates[1]},{self.cordinates[0]}"))
+        target = f"{self.cordinates[3]},{self.cordinates[2]}"
         while heap != []:
             knot = min(heap)
             heap.remove(min(heap))
@@ -87,4 +88,22 @@ class Dijkstra:
                     self.nodes[next] = new
                     heapq.heappush(heap, (new, next))
         print(self.nodes[target])
-        return(self.nodes[target])
+        #print(self.nodes)
+        #return(self.nodes[target])
+
+        print(self.map)
+        row = ""
+        for y in range(len(self.map)):
+            for x in range(len(self.map[0])):
+                if self.map[y][x] == "p":
+                    row += "p"
+                elif self.cordinates[0] == str(x) and self.cordinates[1] == str(y):
+                    row += "o"
+                elif self.cordinates[2] == str(x) and self.cordinates[3] == str(y):
+                    row += "o"
+                else:
+                    row += "d"
+            self.dijkstra_map.append(row)
+            row = ""
+        print(self.dijkstra_map)
+        return self.dijkstra_map
