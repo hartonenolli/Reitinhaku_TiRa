@@ -64,6 +64,9 @@ class KarttaRuutu:
                 elif show_map[color1][color2] == "d":
                     self.canvas.create_rectangle(
                         j, i, j+40, i+40, fill="green")
+                elif show_map[color1][color2] == "r":
+                    self.canvas.create_rectangle(
+                        j, i, j+40, i+40, fill="yellow")
                 else:
                     self.canvas.create_rectangle(
                         j, i, j+40, i+40, fill="black")

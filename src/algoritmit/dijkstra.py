@@ -73,6 +73,7 @@ class Dijkstra:
         Tarkastellaan pienintä arvoa mitä on maaliruutuun."""
     def algorithim(self):
         heap = []
+        path = []
         heapq.heappush(heap, (0, f"{self.cordinates[1]},{self.cordinates[0]}"))
         target = f"{self.cordinates[3]},{self.cordinates[2]}"
         while heap != []:
@@ -87,23 +88,32 @@ class Dijkstra:
                 if new < now:
                     self.nodes[next] = new
                     heapq.heappush(heap, (new, next))
-        print(self.nodes[target])
-        #print(self.nodes)
-        #return(self.nodes[target])
 
-        print(self.map)
+        print(self.nodes[target])
+        to_start = ""
+        to_start += target
+        prev_node = self.nodes[target]
+        while len(path) < int(self.nodes[target]) -1:
+            for previous in self.neighbours[to_start]:
+                if self.nodes[previous] < prev_node:
+                    path.append(previous)
+                    to_start = previous
+                    prev_node = self.nodes[previous]
+                    continue
+
         row = ""
         for y in range(len(self.map)):
             for x in range(len(self.map[0])):
                 if self.map[y][x] == "p":
                     row += "p"
-                elif self.cordinates[0] == str(x) and self.cordinates[1] == str(y):
+                elif self.cordinates[1] == str(x) and self.cordinates[0] == str(y):
                     row += "o"
-                elif self.cordinates[2] == str(x) and self.cordinates[3] == str(y):
+                elif self.cordinates[3] == str(x) and self.cordinates[2] == str(y):
                     row += "o"
+                elif f"{x},{y}" in path:
+                    row += "r"
                 else:
                     row += "d"
             self.dijkstra_map.append(row)
             row = ""
-        print(self.dijkstra_map)
         return self.dijkstra_map
