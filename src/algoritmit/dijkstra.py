@@ -9,8 +9,10 @@ class Dijkstra:
         käydyt: merkataan ruutu käydyksi, kun se on käsitelty
         dijkstra_kartta: 
         koordinaatit: aloitus ja lopetuskoordinaatit
-        kartta: mitä karttaa käytetään"""
-    def __init__(self, map_number, nodes = {}, neighbours = {}, cordinates = [0,0,9,9]):
+        kartta: mitä karttaa käytetään
+    """
+
+    def __init__(self, map_number, nodes={}, neighbours={}, cordinates=[0, 0, 9, 9]):
         self.nodes = nodes
         self.neighbours = neighbours
         self.visited = []
@@ -24,7 +26,9 @@ class Dijkstra:
         Asetetaan jokaiselle valkoiselle ruudulle etäisyys lähtöruudusta = 999
         Lähtöruudulle annetaan etäisyydeksi = 0
         Kutsutaan naapurien teko funktiota jokaisella valkoisella ruudulla
-        Kun kaikki ruudut on käyty läpi kutsutaan algoritmifunktiota."""
+        Kun kaikki ruudut on käyty läpi kutsutaan algoritmifunktiota.
+    """
+
     def make_nodes(self, start_and_finish):
         self.cordinates = start_and_finish
         for y in range(len(self.map)):
@@ -37,12 +41,16 @@ class Dijkstra:
                     self.nodes[f"{x},{y}"] = 999
                     #self.neighbours[f"{x},{y}"] = []
                     self.make_neighbour(x, y)
-        #self.algorithim()
+        # self.algorithim()
+        # print(self.nodes)
+        # print(self.neighbours)
         return self.nodes, self.neighbours
 
     """Käydään kartan ruudulta läpi naapurit
         Tarkastetaan ylös, alas, vasen ja oikea
-        jos naapuri on valkoinen ruutu, niin lisätään se naapureihin."""
+        jos naapuri on valkoinen ruutu, niin lisätään se naapureihin.
+    """
+
     def make_neighbour(self, x, y):
         self.neighbours[f"{x},{y}"] = []
         # Handle different directions
@@ -70,7 +78,9 @@ class Dijkstra:
         Käydään kekoa läpi, niin kauan että ollaan käyty kaikki ruudut ja niiden naapurit
         Lisätään aina käsiteltävä ruutu käytyihin
         Jos käsiteltävä ruutu on käydyissä, niin ohitetaan se
-        Tarkastellaan pienintä arvoa mitä on maaliruutuun."""
+        Tarkastellaan pienintä arvoa mitä on maaliruutuun.
+    """
+
     def algorithim(self):
         heap = []
         path = []
@@ -93,7 +103,7 @@ class Dijkstra:
         to_start = ""
         to_start += target
         prev_node = self.nodes[target]
-        while len(path) < int(self.nodes[target]) -1:
+        while len(path) < int(self.nodes[target]) - 1:
             for previous in self.neighbours[to_start]:
                 if self.nodes[previous] < prev_node:
                     path.append(previous)

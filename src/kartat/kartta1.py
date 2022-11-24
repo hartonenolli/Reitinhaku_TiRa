@@ -22,9 +22,27 @@ class Kartat:
             "poppppoooo",
             "oopoooopoo",
             "oopopooppo"]
+        self.map3 = [
+            "opoooooopoooooo",
+            "opoppppopppppop",
+            "ooopoooopoooooo",
+            "opoooppppoppppp",
+            "opopopooooooooo",
+            "opopoooppoopooo",
+            "ooopopppooopooo",
+            "ppopopopppppopp",
+            "opooopooooooopo",
+            "opopoooopoopopo",
+            "oppppppoppppppo",
+            "ooooooooooooooo",
+            "pooooooooppppoo",
+            "poppppopopoopoo",
+            "oopoooopoppoooo"]
 
     def maps(self, map_number):
         if map_number == 1:
             return self.map1
         if map_number == 2:
             return self.map2
+        if map_number == 3:
+            return self.map3

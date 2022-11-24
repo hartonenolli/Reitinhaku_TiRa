@@ -1,4 +1,3 @@
 [run]
 source = src
-omit = src/tests/*.py,src/*.py,src/kartat/__init__.py
-
+omit = src/**/__init__.py,src/tests/**,src/*.py
