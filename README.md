@@ -10,8 +10,8 @@ Algoritmeja testataan eri **verkoissa** ja mitataan **nopeutta**
 
 ## Dokumentaatio
 - [Määrittelydokumentti](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/maarittely.md)
-- Toteutusdokumentti
-- Testausdokumentti
+- [Toteutusdokumentti](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/toteutus.md)
+- [Testausdokumentti](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/testaus.md)
 - Käyttöohje
 - [Työaikakirjanpito](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
@@ -19,7 +19,7 @@ Algoritmeja testataan eri **verkoissa** ja mitataan **nopeutta**
 - [Viikko1](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/viikkopalautukset/viikko1.md)
 - [Viikko2](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/viikkopalautukset/viikko2.md)
 - [Viikko3](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/viikkopalautukset/viikko3.md)
-- Viikko4
+- [Viikko4](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/viikkopalautukset/viikko4.md)
 - Viikko5
 - Viikko6
 - Viikko7
