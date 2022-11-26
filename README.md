@@ -12,7 +12,7 @@ Algoritmeja testataan eri **verkoissa** ja mitataan **nopeutta**
 - [Määrittelydokumentti](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/maarittely.md)
 - [Toteutusdokumentti](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/toteutus.md)
 - [Testausdokumentti](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/testaus.md)
-- Käyttöohje
+- [Käyttöohje](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/kayttoohje.md)
 - [Työaikakirjanpito](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
 # Viikkopalautukset:
