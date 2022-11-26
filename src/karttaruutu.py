@@ -39,21 +39,15 @@ class KarttaRuutu:
         elif show_map[int(self.x_y_list[2])][int(self.x_y_list[3])] == "p":
             print("End is not correct!")
             self._initialize()
-        #show_map = Kartat().maps(map_number)
         elif self.save_dijkstra == 1:
             time_starts = datetime.datetime.now()
             make_map = Dijkstra(map_number).make_nodes(self.x_y_list)
             show_map = Dijkstra(
-                map_number, make_map[0], make_map[1], self.x_y_list).algorithim()
+                map_number).algorithim(make_map[0], make_map[1], self.x_y_list)
             time_ends = datetime.datetime.now()
             print(time_ends-time_starts)
         color1 = 0
         color2 = 0
-
-        start1 = ""
-        start2 = ""
-        finish1 = ""
-        finish2 = ""
 
         to = 40
         until = 401
@@ -68,19 +62,14 @@ class KarttaRuutu:
                 if show_map[color1][color2] == "o":
                     self.canvas.create_rectangle(
                         j, i, j+to, i+to, fill="white")
-                    # if self.x_y_list is not None:
                     if str(color1
                            ) == self.x_y_list[0] and str(color2) == self.x_y_list[1]:
                         self.canvas.create_rectangle(
                             j, i, j+to, i+to, fill="blue")
-                        start1 += str(color2)
-                        start2 += str(color1)
                     if str(color1
                            ) == self.x_y_list[2] and str(color2) == self.x_y_list[3]:
                         self.canvas.create_rectangle(
                             j, i, j+to, i+to, fill="red")
-                        finish1 += str(color2)
-                        finish2 += str(color1)
                 elif show_map[color1][color2] == "d":
                     self.canvas.create_rectangle(
                         j, i, j+to, i+to, fill="green")
@@ -94,15 +83,37 @@ class KarttaRuutu:
             color1 += 1
             color2 = 0
         self.canvas.pack(padx=0, pady=50)
-        # if algorithm_number == 1:
-        # if self.save_dijkstra == 1:
-        #    Dijkstra(map_number).make_nodes([start1, start2, finish1, finish2])
-        return True
 
     def _handle_finding_route(self, value_list, map_number):
-        print("Reitti löytyi ajassa:")
-        print(value_list[0], value_list[1])
-        print(value_list[2], value_list[3])
+        if map_number != 3:
+            if str(value_list[1]) not in ["0","1","2","3","4","5","6","7","8","9"]:
+                print("Huolitutu arvot 0-9, alku x väärin. Asetettu 0")
+                value_list[1] = str(0)
+            if str(value_list[0]) not in ["0","1","2","3","4","5","6","7","8","9"]:
+                print("Huolitutu arvot 0-9, alku y väärin. Asetetu 0")
+                value_list[0] = str(0)
+            if str(value_list[3]) not in ["0","1","2","3","4","5","6","7","8","9"]:
+                print("Huolitutu arvot 0-9, loppu x väärin. Asetettu 9")
+                value_list[3] = str(9)
+            if str(value_list[2]) not in ["0","1","2","3","4","5","6","7","8","9"]:
+                print("Huolitutu arvot 0-9, loppu y väärin. Asetettu 9")
+                value_list[2] = str(9)
+        else:
+            if str(value_list[1]) not in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
+                print("Huolitutu arvot 0-14, alku x väärin. Asetettu 0")
+                value_list[1] = str(0)
+            if str(value_list[0]) not in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
+                print("Huolitutu arvot 0-14, alku y väärin. Asetetu 0")
+                value_list[0] = str(0)
+            if str(value_list[3]) not in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
+                print("Huolitutu arvot 0-14, loppu x väärin. Asetettu 14")
+                value_list[3] = str(14)
+            if str(value_list[2]) not in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
+                print("Huolitutu arvot 0-14, loppu y väärin. Asetettu 14")
+                value_list[2] = str(14)
+        #print("Reitti löytyi ajassa:")
+        print(value_list[1], value_list[0])
+        print(value_list[3], value_list[2])
         self.x_y_list = value_list
         self.set_cordinates_for_canvas(map_number)
 
@@ -120,10 +131,10 @@ class KarttaRuutu:
         label_for_finish = ttk.Label(
             master=self._frame, text="Lopetuskoordinaatti")
 
-        y_1 = ttk.Entry(master=self._frame)
         x_1 = ttk.Entry(master=self._frame)
-        y_2 = ttk.Entry(master=self._frame)
+        y_1 = ttk.Entry(master=self._frame)
         x_2 = ttk.Entry(master=self._frame)
+        y_2 = ttk.Entry(master=self._frame)
 
         label.grid(row=0, column=0)
         label_for_start.grid(row=3, column=0)

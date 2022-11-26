@@ -28,15 +28,15 @@ class Kartat:
             "ooopoooopoooooo",
             "opoooppppoppppp",
             "opopopooooooooo",
-            "opopoooppoopooo",
-            "ooopopppooopooo",
+            "opopoooppoopppo",
+            "ooopppppooopooo",
             "ppopopopppppopp",
             "opooopooooooopo",
             "opopoooopoopopo",
             "oppppppoppppppo",
-            "ooooooooooooooo",
-            "pooooooooppppoo",
-            "poppppopopoopoo",
+            "oopooopoooooooo",
+            "pooopooooppppoo",
+            "poppppopopoopop",
             "oopoooopoppoooo"]
 
     def maps(self, map_number):

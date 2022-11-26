@@ -81,7 +81,11 @@ class Dijkstra:
         Tarkastellaan pienintä arvoa mitä on maaliruutuun.
     """
 
-    def algorithim(self):
+    def algorithim(self, nodes, neighbours, cordinates):
+        self.nodes = nodes
+        self.neighbours = neighbours
+        self.cordinates = cordinates
+        self.visited = []
         heap = []
         path = []
         heapq.heappush(heap, (0, f"{self.cordinates[1]},{self.cordinates[0]}"))
@@ -126,4 +130,5 @@ class Dijkstra:
                     row += "d"
             self.dijkstra_map.append(row)
             row = ""
+        print(self.dijkstra_map)
         return self.dijkstra_map
