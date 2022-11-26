@@ -40,6 +40,7 @@ class KarttaRuutu:
             print("End is not correct!")
             self._initialize()
         elif self.save_dijkstra == 1:
+            print("Reitti löytyi ajassa:")
             time_starts = datetime.datetime.now()
             make_map = Dijkstra(map_number).make_nodes(self.x_y_list)
             show_map = Dijkstra(
@@ -55,7 +56,6 @@ class KarttaRuutu:
         if map_number == 3:
             to = 30
             until = 461
-
 
         for i in range(to, until, to):
             for j in range(to, until, to):
@@ -86,32 +86,31 @@ class KarttaRuutu:
 
     def _handle_finding_route(self, value_list, map_number):
         if map_number != 3:
-            if str(value_list[1]) not in ["0","1","2","3","4","5","6","7","8","9"]:
+            if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
                 print("Huolitutu arvot 0-9, alku x väärin. Asetettu 0")
                 value_list[1] = str(0)
-            if str(value_list[0]) not in ["0","1","2","3","4","5","6","7","8","9"]:
+            if str(value_list[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
                 print("Huolitutu arvot 0-9, alku y väärin. Asetetu 0")
                 value_list[0] = str(0)
-            if str(value_list[3]) not in ["0","1","2","3","4","5","6","7","8","9"]:
+            if str(value_list[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
                 print("Huolitutu arvot 0-9, loppu x väärin. Asetettu 9")
                 value_list[3] = str(9)
-            if str(value_list[2]) not in ["0","1","2","3","4","5","6","7","8","9"]:
+            if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
                 print("Huolitutu arvot 0-9, loppu y väärin. Asetettu 9")
                 value_list[2] = str(9)
         else:
-            if str(value_list[1]) not in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
+            if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, alku x väärin. Asetettu 0")
                 value_list[1] = str(0)
-            if str(value_list[0]) not in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
+            if str(value_list[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, alku y väärin. Asetetu 0")
                 value_list[0] = str(0)
-            if str(value_list[3]) not in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
+            if str(value_list[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, loppu x väärin. Asetettu 14")
                 value_list[3] = str(14)
-            if str(value_list[2]) not in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
+            if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, loppu y väärin. Asetettu 14")
                 value_list[2] = str(14)
-        #print("Reitti löytyi ajassa:")
         print(value_list[1], value_list[0])
         print(value_list[3], value_list[2])
         self.x_y_list = value_list
@@ -163,11 +162,11 @@ class KarttaRuutu:
         button_map.grid(row=1, column=1)
 
         button_3 = ttk.Button(master=self._frame,
-                                text="Kartta3",
-                                command=lambda:
-                                self._handle_finding_route(
-                                    [y_1.get(), x_1.get(), y_2.get(), x_2.get()],
-                                    3))
+                              text="Kartta3",
+                              command=lambda:
+                              self._handle_finding_route(
+                                  [y_1.get(), x_1.get(), y_2.get(), x_2.get()],
+                                  3))
 
         button_3.grid(row=1, column=2)
 

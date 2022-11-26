@@ -130,5 +130,4 @@ class Dijkstra:
                     row += "d"
             self.dijkstra_map.append(row)
             row = ""
-        print(self.dijkstra_map)
         return self.dijkstra_map

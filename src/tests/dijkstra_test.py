@@ -22,7 +22,8 @@ class TestDijkstra(unittest.TestCase):
     def test_make_nodes(self):
         result = self.level_1.make_nodes([0, 0, 9, 9])
         self.assertEqual(result, Assets().nodes_tests(1))
-    
+
     def test_algorithim(self):
-        result = Dijkstra(1).algorithim(Assets().node_algorithim(),Assets().neighbours_algorithim(),[0,0,9,9])
+        result = Dijkstra(1).algorithim(
+            Assets().node_algorithim(), Assets().neighbours_algorithim(), [0, 0, 9, 9])
         self.assertEqual(result, Assets().algorithim_result())
