@@ -46,3 +46,16 @@
 - 3h
 - Saatu algoritmi valmiiksi
 - Testien tekemistä
+
+## 23.11
+- 2h
+- saatu reitin visualisointi toimimaan
+
+## 24.11
+- 1h
+- Siistitty ohjelmaa
+
+## 26.11
+- 4h
+- Saatu testit toimimaan haluamaallani tavalla
+- Tutkittu IDA* algoritmia
