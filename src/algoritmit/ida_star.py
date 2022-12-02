@@ -52,7 +52,6 @@ class IDA_Star:
         start = self.alku
         fin = self.loppu
         raja = self.heurestinen_arvo(start, fin)
-        print(raja)
         while True:
             ruudun_tila = self.etsi(start, 0, raja, fin)
             if ruudun_tila == True:
@@ -61,6 +60,7 @@ class IDA_Star:
             if ruudun_tila >= 999:
                 return False
             raja = ruudun_tila
+        print(f"Reitin pituus {len(self.tarkastettu)} ruutua")
         return self.kartan_palautus(start, fin)
 
 

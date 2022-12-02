@@ -12,17 +12,6 @@ class Kartat:
             "ooopooopoo",
             "ooppoooppo"]
         self.map2 = [
-            "opooppooop",
-            "opoppooopp",
-            "ooopoopopp",
-            "ooopppoopo",
-            "ppoppooooo",
-            "pooooooopp",
-            "poooppoopo",
-            "poppppoooo",
-            "oopoooopoo",
-            "oopopooppo"]
-        self.map3 = [
             "opoooooopoooooo",
             "opoppppopppppop",
             "ooopoooopoooooo",
@@ -38,6 +27,27 @@ class Kartat:
             "pooopooooppppoo",
             "poppppopopoopop",
             "oopoooopoppoooo"]
+        self.map3 = [
+            "opoooooopooooooooooo",
+            "oooooopoppppopppppop",
+            "opopooooooooopoooooo",
+            "opoooppppooooooppppp",
+            "opopopoooooooooooooo",
+            "opoooopopoooppoopppo",
+            "opopppoooooopooopooo",
+            "ppopppppopppppoppppp",
+            "opooopooooooopoooooo",
+            "ooopoppppppoopoopopo",
+            "oppppopoooppoppppppo",
+            "oopooopooooooooooooo",
+            "pooopoooopppppoooooo",
+            "pooooooppppopppoooop",
+            "oooooopopooooooopooo",
+            "oppppoooooppoppppppo",
+            "oopooopoooooopoooooo",
+            "pooopoooopopppoooooo",
+            "poooppppppoooopoopoo",
+            "oopooooooooopooooppo"]
 
     def maps(self, map_number):
         if map_number == 1:

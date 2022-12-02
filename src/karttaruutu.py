@@ -58,16 +58,24 @@ class KarttaRuutu:
             print(f"Reitti löytyi ajassa {sekuntit[-1]}s")
         elif self.ida_star == 1:
             print("lyhin reitti löydetty:")
+            time_starts = datetime.datetime.now()
             tee_kartta = IDA_Star(map_number).tee_ruudut(self.x_y_list)
             show_map = IDA_Star(map_number).ida_funktio(tee_kartta[0], tee_kartta[1], self.x_y_list)
+            time_ends = datetime.datetime.now()
+            final_time = time_ends-time_starts
+            sekuntit = str(final_time).split(":")
+            print(f"Reitti löytyi ajassa {sekuntit[-1]}s")
         color1 = 0
         color2 = 0
 
         to = 40
         until = 401
 
-        if map_number == 3:
+        if map_number == 2:
             to = 30
+            until = 461
+        elif map_number == 3:
+            to = 23
             until = 461
 
         for i in range(to, until, to):
@@ -98,7 +106,7 @@ class KarttaRuutu:
         self.canvas.pack(padx=0, pady=50)
 
     def _handle_finding_route(self, value_list, map_number):
-        if map_number != 3:
+        if map_number == 1:
             if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
                 print("Huolitutu arvot 0-9, alku x väärin. Asetettu 0")
                 value_list[1] = str(0)
@@ -111,7 +119,7 @@ class KarttaRuutu:
             if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
                 print("Huolitutu arvot 0-9, loppu y väärin. Asetettu 9")
                 value_list[2] = str(9)
-        else:
+        elif map_number == 2:
             if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, alku x väärin. Asetettu 0")
                 value_list[1] = str(0)
@@ -124,6 +132,19 @@ class KarttaRuutu:
             if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, loppu y väärin. Asetettu 14")
                 value_list[2] = str(14)
+        else:
+            if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+                print("Huolitutu arvot 0-19, alku x väärin. Asetettu 0")
+                value_list[1] = str(0)
+            if str(value_list[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+                print("Huolitutu arvot 0-19, alku y väärin. Asetetu 0")
+                value_list[0] = str(0)
+            if str(value_list[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+                print("Huolitutu arvot 0-19, loppu x väärin. Asetettu 19")
+                value_list[3] = str(19)
+            if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+                print("Huolitutu arvot 0-19, loppu y väärin. Asetettu 19")
+                value_list[2] = str(19)
         print(value_list[1], value_list[0])
         print(value_list[3], value_list[2])
         self.x_y_list = value_list
