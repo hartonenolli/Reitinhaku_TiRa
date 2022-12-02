@@ -35,15 +35,11 @@ class Dijkstra:
             for x in range(len(self.map[0])):
                 if str(x) == self.cordinates[1] and str(y) == self.cordinates[0]:
                     self.nodes[f"{x},{y}"] = 0
-                    #self.neighbours[f"{x},{y}"] = []
                     self.make_neighbour(x, y)
                 elif self.map[y][x] != "p":
                     self.nodes[f"{x},{y}"] = 999
-                    #self.neighbours[f"{x},{y}"] = []
                     self.make_neighbour(x, y)
-        # self.algorithim()
-        # print(self.nodes)
-        # print(self.neighbours)
+
         return self.nodes, self.neighbours
 
     """Käydään kartan ruudulta läpi naapurit
@@ -103,7 +99,7 @@ class Dijkstra:
                     self.nodes[next] = new
                     heapq.heappush(heap, (new, next))
 
-        print(self.nodes[target])
+        print(f"Reitin pituus {self.nodes[target]} ruutua")
         to_start = ""
         to_start += target
         prev_node = self.nodes[target]

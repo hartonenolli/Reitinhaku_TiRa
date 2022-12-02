@@ -1,6 +1,7 @@
 from tkinter import ttk, constants, Canvas
 from kartat.kartta1 import Kartat
 from algoritmit.dijkstra import Dijkstra
+from algoritmit.ida_star import IDA_Star
 import datetime
 
 
@@ -11,6 +12,7 @@ class KarttaRuutu:
         self.canvas = None
         self.x_y_list = ["0", "0", "9", "9"]
         self.save_dijkstra = None
+        self.ida_star = None
         self._initialize()
 
     def pack(self):
@@ -21,6 +23,11 @@ class KarttaRuutu:
 
     def set_dijkstra(self):
         self.save_dijkstra = 1
+        self.ida_star = None
+
+    def set_ida_star(self):
+        self.ida_star = 1
+        self.save_dijkstra = None
 
     """Alustetaan kartta käymällä rivejä läpi,
     jos kartalla on 'o', niin tulee valkoinen,
@@ -40,13 +47,19 @@ class KarttaRuutu:
             print("End is not correct!")
             self._initialize()
         elif self.save_dijkstra == 1:
-            print("Reitti löytyi ajassa:")
+            print("Lyhyin reitti löydetty:")
             time_starts = datetime.datetime.now()
             make_map = Dijkstra(map_number).make_nodes(self.x_y_list)
             show_map = Dijkstra(
                 map_number).algorithim(make_map[0], make_map[1], self.x_y_list)
             time_ends = datetime.datetime.now()
-            print(time_ends-time_starts)
+            final_time = time_ends-time_starts
+            sekuntit = str(final_time).split(":")
+            print(f"Reitti löytyi ajassa {sekuntit[-1]}s")
+        elif self.ida_star == 1:
+            print("lyhin reitti löydetty:")
+            tee_kartta = IDA_Star(map_number).tee_ruudut(self.x_y_list)
+            nayta_kartta = IDA_Star(map_number).ida_funktio(tee_kartta[0], tee_kartta[1])
         color1 = 0
         color2 = 0
 
@@ -175,3 +188,9 @@ class KarttaRuutu:
                                      command=self.set_dijkstra)
 
         button_dijkstra.grid(row=2, column=0)
+
+        button_ida = ttk.Button(master=self._frame,
+                                     text="IDA-*",
+                                     command=self.set_ida_star)
+
+        button_ida.grid(row=2, column=1)
