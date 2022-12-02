@@ -10,6 +10,8 @@ class IDA_Star:
         self.naapurit = {}
         self.tarkastettu = []
         self.matka = 0
+        self.ida_star_map = []
+        self.katsottu = []
 
     def tee_ruudut(self, alku_ja_loppu):
         self.koordinaatit = alku_ja_loppu
@@ -42,38 +44,35 @@ class IDA_Star:
                 self.naapurit[f"{x},{y}"].append(f"{x},{y+1}")
         return True    
     
-    def ida_funktio(self, ruutuja, naapureita):
+    def ida_funktio(self, ruutuja, naapureita, koordinaatti):
         self.ruudut = ruutuja
         self.naapurit = naapureita
-        self.alku = "0,0"
-        self.loppu = "2,2"
-        start = "0,0"
-        fin = "2,2"
+        self.alku = f"{koordinaatti[1]},{koordinaatti[0]}"
+        self.loppu = f"{koordinaatti[3]},{koordinaatti[2]}"
+        start = self.alku
+        fin = self.loppu
         raja = self.heurestinen_arvo(start, fin)
         print(raja)
         while True:
             ruudun_tila = self.etsi(start, 0, raja, fin)
             if ruudun_tila == True:
-                print("loppu")
+                print(len(self.tarkastettu))
                 break
             if ruudun_tila >= 999:
                 return False
             raja = ruudun_tila
-            print(raja)
+        return self.kartan_palautus(start, fin)
+
 
     def etsi(self, node, maara, raja, fin):
-        print("haku")
         f=maara+self.heurestinen_arvo(node,fin)
         if f > raja:
-            print(f"f>raja, {f}>{raja}")
             return f
         if node == self.loppu:
-            print("node oli loppu")
             return True
         min_arvo = 999
-        print(self.naapurit[node])
         for naapuri in self.naapurit[node]:
-            print(naapuri)
+            self.katsottu.append(naapuri)
             if naapuri == self.alku:
                 continue
             if naapuri not in self.tarkastettu:
@@ -83,13 +82,9 @@ class IDA_Star:
                     self.matka += 1
                     return True
                 if etsi_naapuri < min_arvo:
-                    print("etsi naaapuri pienempi", etsi_naapuri)
                     min_arvo = etsi_naapuri
-                print(self.tarkastettu)
                 self.tarkastettu.pop()
-                print(self.tarkastettu)
-            else:
-                print("naapuri oli tarkastetuissa")
+
         return min_arvo
 
 
@@ -100,11 +95,24 @@ class IDA_Star:
 
         ruutu_x = abs(int(arvot_alku[0]) - int(arvot_loppu[0]))
         ruutu_y = abs(int(arvot_alku[1]) - int(arvot_loppu[1]))
-        print("heurestiikka", ruutu_x+ruutu_y)
         return ruutu_x+ruutu_y
 
-if __name__=="__main__":
-    test = IDA_Star()
-    test.heurestinen_arvo("0,0", "9,9")
-    test.heurestinen_arvo("4,5","5,5")
-    test.heurestinen_arvo("9,9", "8,8")
+    def kartan_palautus(self, start, fin):
+        row = ""
+        for y in range(len(self.kartta)):
+            for x in range(len(self.kartta[0])):
+                if self.kartta[y][x] == "p":
+                    row += "p"
+                elif start == f"{x},{y}":
+                    row += "o"
+                elif fin == f"{x},{y}":
+                    row += "o"
+                elif f"{x},{y}" in self.tarkastettu:
+                    row += "r"
+                elif f"{x},{y}" in self.katsottu:
+                    row += "d"
+                else:
+                    row += "o"
+            self.ida_star_map.append(row)
+            row = ""
+        return self.ida_star_map

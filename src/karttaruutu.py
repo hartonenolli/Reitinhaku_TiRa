@@ -59,7 +59,7 @@ class KarttaRuutu:
         elif self.ida_star == 1:
             print("lyhin reitti löydetty:")
             tee_kartta = IDA_Star(map_number).tee_ruudut(self.x_y_list)
-            nayta_kartta = IDA_Star(map_number).ida_funktio(tee_kartta[0], tee_kartta[1])
+            show_map = IDA_Star(map_number).ida_funktio(tee_kartta[0], tee_kartta[1], self.x_y_list)
         color1 = 0
         color2 = 0
 
