@@ -16,7 +16,7 @@
 ## Vaikeuksia
 - Vaikeuksia oli algoritmin toteutuksessa, mutta onneksi sain sen toimimaan loppujen lopuksi
 - Ajan löytäminen projektin tekemiseen oli kuitilla tällä viikolla.. vaikka pääsinkin tavoitteeseen, niin jäi sellainen tunne, että olisin halunnut tehdä enemmän
+- Edellämainitusta syystä olen testauksen kanssa jäljessä viikkoaikaitaulun mukaan, mutta tähän pyrin painottamaan ensi viikolla
 
 ## Seuraavan viikon tavoite
 - IDA-* testien tekeminen
-- Dijkstran algoritmiin tulee rakentaa vielä keko
