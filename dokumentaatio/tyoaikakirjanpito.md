@@ -59,3 +59,15 @@
 - 4h
 - Saatu testit toimimaan haluamaallani tavalla
 - Tutkittu IDA* algoritmia
+
+## 1.12
+- 2h
+- IDA-* algoritmin tekemistä
+
+## 2.12
+- 2h
+- IDA-* toimintaan ja visualisoitu
+
+## 3.12
+- 1h
+- Koodin siistiminen
