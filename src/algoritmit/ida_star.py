@@ -1,5 +1,6 @@
 from kartat.kartta1 import Kartat
 
+
 class IDA_Star:
     def __init__(self, nyky_kartta):
         self.kartta = Kartat().maps(nyky_kartta)
@@ -42,8 +43,8 @@ class IDA_Star:
         if y < len(self.kartta)-1:
             if self.kartta[y+1][x] != "p":
                 self.naapurit[f"{x},{y}"].append(f"{x},{y+1}")
-        return True    
-    
+        return True
+
     def ida_funktio(self, ruutuja, naapureita, koordinaatti):
         self.ruudut = ruutuja
         self.naapurit = naapureita
@@ -63,9 +64,8 @@ class IDA_Star:
         print(f"Reitin pituus {len(self.tarkastettu)} ruutua")
         return self.kartan_palautus(start, fin)
 
-
     def etsi(self, node, maara, raja, fin):
-        f=maara+self.heurestinen_arvo(node,fin)
+        f = maara+self.heurestinen_arvo(node, fin)
         if f > raja:
             return f
         if node == self.loppu:
@@ -86,8 +86,6 @@ class IDA_Star:
                 self.tarkastettu.pop()
 
         return min_arvo
-
-
 
     def heurestinen_arvo(self, ruutu, loppu):
         arvot_alku = ruutu.split(",")

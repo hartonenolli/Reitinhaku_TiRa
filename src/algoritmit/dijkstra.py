@@ -12,13 +12,13 @@ class Dijkstra:
         kartta: mitä karttaa käytetään
     """
 
-    def __init__(self, map_number, nodes={}, neighbours={}, cordinates=[0, 0, 9, 9]):
-        self.nodes = nodes
-        self.neighbours = neighbours
-        self.visited = []
-        self.dijkstra_map = []
-        self.cordinates = cordinates
-        self.map = Kartat().maps(map_number)
+    def __init__(self, kartta_num, ruudut={}, naapurit={}, koordinaatit=[0, 0, 9, 9]):
+        self.ruudut = ruudut
+        self.naapurit = naapurit
+        self.vierailtu = []
+        self.dijkstra_kartta = []
+        self.koordinaatit = koordinaatit
+        self.kartta = Kartat().maps(kartta_num)
 
     """Tehdään nodet käymällä kartta läpi.
         Ensin alustetaan alku ja loppu koordinaatteihin.
@@ -29,43 +29,43 @@ class Dijkstra:
         Kun kaikki ruudut on käyty läpi kutsutaan algoritmifunktiota.
     """
 
-    def make_nodes(self, start_and_finish):
-        self.cordinates = start_and_finish
-        for y in range(len(self.map)):
-            for x in range(len(self.map[0])):
-                if str(x) == self.cordinates[1] and str(y) == self.cordinates[0]:
-                    self.nodes[f"{x},{y}"] = 0
-                    self.make_neighbour(x, y)
-                elif self.map[y][x] != "p":
-                    self.nodes[f"{x},{y}"] = 999
-                    self.make_neighbour(x, y)
+    def tee_ruudut(self, alku_loppu):
+        self.koordinaatit = alku_loppu
+        for y in range(len(self.kartta)):
+            for x in range(len(self.kartta[0])):
+                if str(x) == self.koordinaatit[1] and str(y) == self.koordinaatit[0]:
+                    self.ruudut[f"{x},{y}"] = 0
+                    self.tee_naapuri(x, y)
+                elif self.kartta[y][x] != "p":
+                    self.ruudut[f"{x},{y}"] = 999
+                    self.tee_naapuri(x, y)
 
-        return self.nodes, self.neighbours
+        return self.ruudut, self.naapurit
 
     """Käydään kartan ruudulta läpi naapurit
         Tarkastetaan ylös, alas, vasen ja oikea
         jos naapuri on valkoinen ruutu, niin lisätään se naapureihin.
     """
 
-    def make_neighbour(self, x, y):
-        self.neighbours[f"{x},{y}"] = []
+    def tee_naapuri(self, x, y):
+        self.naapurit[f"{x},{y}"] = []
         # Handle different directions
         # left
         if x > 0:
-            if self.map[y][x-1] != "p":
-                self.neighbours[f"{x},{y}"].append(f"{x-1},{y}")
+            if self.kartta[y][x-1] != "p":
+                self.naapurit[f"{x},{y}"].append(f"{x-1},{y}")
         # up
         if y > 0:
-            if self.map[y-1][x] != "p":
-                self.neighbours[f"{x},{y}"].append(f"{x},{y-1}")
+            if self.kartta[y-1][x] != "p":
+                self.naapurit[f"{x},{y}"].append(f"{x},{y-1}")
         # right
-        if x < len(self.map[0])-1:
-            if self.map[y][x+1] != "p":
-                self.neighbours[f"{x},{y}"].append(f"{x+1},{y}")
+        if x < len(self.kartta[0])-1:
+            if self.kartta[y][x+1] != "p":
+                self.naapurit[f"{x},{y}"].append(f"{x+1},{y}")
         # down
-        if y < len(self.map)-1:
-            if self.map[y+1][x] != "p":
-                self.neighbours[f"{x},{y}"].append(f"{x},{y+1}")
+        if y < len(self.kartta)-1:
+            if self.kartta[y+1][x] != "p":
+                self.naapurit[f"{x},{y}"].append(f"{x},{y+1}")
         return True
 
     """Algoritmin funktio
@@ -77,53 +77,54 @@ class Dijkstra:
         Tarkastellaan pienintä arvoa mitä on maaliruutuun.
     """
 
-    def algorithim(self, nodes, neighbours, cordinates):
-        self.nodes = nodes
-        self.neighbours = neighbours
-        self.cordinates = cordinates
-        self.visited = []
-        heap = []
-        path = []
-        heapq.heappush(heap, (0, f"{self.cordinates[1]},{self.cordinates[0]}"))
-        target = f"{self.cordinates[3]},{self.cordinates[2]}"
-        while heap != []:
-            knot = min(heap)
-            heap.remove(min(heap))
-            if knot[1] in self.visited:
+    def algoritmi(self, ruudut, naapurit, koordinaatit):
+        self.ruudut = ruudut
+        self.naapurit = naapurit
+        self.koordinaatit = koordinaatit
+        self.vierailtu = []
+        keko = []
+        polku = []
+        heapq.heappush(
+            keko, (0, f"{self.koordinaatit[1]},{self.koordinaatit[0]}"))
+        maali = f"{self.koordinaatit[3]},{self.koordinaatit[2]}"
+        while keko != []:
+            solmu = min(keko)
+            keko.remove(min(keko))
+            if solmu[1] in self.vierailtu:
                 continue
-            self.visited.append(knot[1])
-            for next in self.neighbours.get(knot[1]):
-                now = self.nodes[next]
-                new = self.nodes[knot[1]]+1
-                if new < now:
-                    self.nodes[next] = new
-                    heapq.heappush(heap, (new, next))
+            self.vierailtu.append(solmu[1])
+            for seuraava in self.naapurit.get(solmu[1]):
+                nyt = self.ruudut[seuraava]
+                uusi = self.ruudut[solmu[1]]+1
+                if uusi < nyt:
+                    self.ruudut[seuraava] = uusi
+                    heapq.heappush(keko, (uusi, seuraava))
 
-        print(f"Reitin pituus {self.nodes[target]} ruutua")
-        to_start = ""
-        to_start += target
-        prev_node = self.nodes[target]
-        while len(path) < int(self.nodes[target]) - 1:
-            for previous in self.neighbours[to_start]:
-                if self.nodes[previous] < prev_node:
-                    path.append(previous)
-                    to_start = previous
-                    prev_node = self.nodes[previous]
+        print(f"Reitin pituus {self.ruudut[maali]} ruutua")
+        alkuun = ""
+        alkuun += maali
+        aikaisempi_ruutu = self.ruudut[maali]
+        while len(polku) < int(self.ruudut[maali]) - 1:
+            for previous in self.naapurit[alkuun]:
+                if self.ruudut[previous] < aikaisempi_ruutu:
+                    polku.append(previous)
+                    alkuun = previous
+                    aikaisempi_ruutu = self.ruudut[previous]
                     continue
 
-        row = ""
-        for y in range(len(self.map)):
-            for x in range(len(self.map[0])):
-                if self.map[y][x] == "p":
-                    row += "p"
-                elif self.cordinates[1] == str(x) and self.cordinates[0] == str(y):
-                    row += "o"
-                elif self.cordinates[3] == str(x) and self.cordinates[2] == str(y):
-                    row += "o"
-                elif f"{x},{y}" in path:
-                    row += "r"
+        rivi = ""
+        for y in range(len(self.kartta)):
+            for x in range(len(self.kartta[0])):
+                if self.kartta[y][x] == "p":
+                    rivi += "p"
+                elif self.koordinaatit[1] == str(x) and self.koordinaatit[0] == str(y):
+                    rivi += "o"
+                elif self.koordinaatit[3] == str(x) and self.koordinaatit[2] == str(y):
+                    rivi += "o"
+                elif f"{x},{y}" in polku:
+                    rivi += "r"
                 else:
-                    row += "d"
-            self.dijkstra_map.append(row)
-            row = ""
-        return self.dijkstra_map
+                    rivi += "d"
+            self.dijkstra_kartta.append(rivi)
+            rivi = ""
+        return self.dijkstra_kartta

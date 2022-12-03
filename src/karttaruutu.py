@@ -49,9 +49,9 @@ class KarttaRuutu:
         elif self.save_dijkstra == 1:
             print("Lyhyin reitti löydetty:")
             time_starts = datetime.datetime.now()
-            make_map = Dijkstra(map_number).make_nodes(self.x_y_list)
+            make_map = Dijkstra(map_number).tee_ruudut(self.x_y_list)
             show_map = Dijkstra(
-                map_number).algorithim(make_map[0], make_map[1], self.x_y_list)
+                map_number).algoritmi(make_map[0], make_map[1], self.x_y_list)
             time_ends = datetime.datetime.now()
             final_time = time_ends-time_starts
             sekuntit = str(final_time).split(":")
@@ -60,7 +60,8 @@ class KarttaRuutu:
             print("lyhin reitti löydetty:")
             time_starts = datetime.datetime.now()
             tee_kartta = IDA_Star(map_number).tee_ruudut(self.x_y_list)
-            show_map = IDA_Star(map_number).ida_funktio(tee_kartta[0], tee_kartta[1], self.x_y_list)
+            show_map = IDA_Star(map_number).ida_funktio(
+                tee_kartta[0], tee_kartta[1], self.x_y_list)
             time_ends = datetime.datetime.now()
             final_time = time_ends-time_starts
             sekuntit = str(final_time).split(":")
@@ -211,7 +212,7 @@ class KarttaRuutu:
         button_dijkstra.grid(row=2, column=0)
 
         button_ida = ttk.Button(master=self._frame,
-                                     text="IDA-*",
-                                     command=self.set_ida_star)
+                                text="IDA-*",
+                                command=self.set_ida_star)
 
         button_ida.grid(row=2, column=1)
