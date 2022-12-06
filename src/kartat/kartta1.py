@@ -48,6 +48,7 @@ class Kartat:
             "pooopoooopopppoooooo",
             "poooppppppoooopoopoo",
             "oopooooooooopooooppo"]
+        self.map_test = ["oo", "oo"]
 
     def maps(self, map_number):
         if map_number == 1:
@@ -56,3 +57,4 @@ class Kartat:
             return self.map2
         if map_number == 3:
             return self.map3
+        return self.map_test

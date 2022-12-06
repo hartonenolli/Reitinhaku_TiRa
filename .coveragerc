@@ -1,2 +1,3 @@
 [run]
 source = src
+omit = src/tests/**,src/karttaruutu.py,src/kayttoliittyma.py,src/kartat/**,src/algoritmit/__init__.py
