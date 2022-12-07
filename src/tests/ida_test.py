@@ -2,6 +2,7 @@ import unittest
 from algoritmit.ida_star import IDA_Star
 from tests.test_assets.d_assets import Assets
 
+
 class TestDijkstra(unittest.TestCase):
     def setUp(self):
         self.kartta_1 = IDA_Star(1)
@@ -20,12 +21,12 @@ class TestDijkstra(unittest.TestCase):
 
     def test_tee_naapurit(self):
         tulos = self.kartta_testeille.tee_ruudut([0, 0, 1, 1])
-        self.assertEqual(tulos, ({'0,0': [], '1,0': [], '0,1': [], '1,1': []},
-        {'0,0': ['1,0', '0,1'], '1,0': ['0,0', '1,1'],
-        '0,1': ['0,0', '1,1'], '1,1': ['0,1', '1,0']}))
-    
+        self.assertEqual(tulos,
+                         {'0,0': ['1,0', '0,1'], '1,0': ['0,0', '1,1'],
+                          '0,1': ['0,0', '1,1'], '1,1': ['0,1', '1,0']})
+
     def test_algoritmi(self):
-        tulos = IDA_Star(4).ida_funktio({'0,0': [], '1,0': [], '0,1': [], '1,1': []},
-        {'0,0': ['1,0', '0,1'], '1,0': ['0,0', '1,1'],
-        '0,1': ['0,0', '1,1'], '1,1': ['0,1', '1,0']}, [0, 0, 1, 1])
+        tulos = IDA_Star(4).ida_funktio(
+            {'0,0': ['1,0', '0,1'], '1,0': ['0,0', '1,1'],
+             '0,1': ['0,0', '1,1'], '1,1': ['0,1', '1,0']}, [0, 0, 1, 1])
         self.assertEqual(tulos, ['or', 'oo'])

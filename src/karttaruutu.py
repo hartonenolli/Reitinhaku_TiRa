@@ -66,7 +66,7 @@ class KarttaRuutu:
             time_starts = datetime.datetime.now()
             tee_kartta = IDA_Star(self.map).tee_ruudut(self.x_y_list)
             show_map = IDA_Star(self.map).ida_funktio(
-                tee_kartta[0], tee_kartta[1], self.x_y_list)
+                tee_kartta, self.x_y_list)
             time_ends = datetime.datetime.now()
             final_time = time_ends-time_starts
             sekuntit = str(final_time).split(":")
@@ -217,7 +217,7 @@ class KarttaRuutu:
                                      text="Dijkstra",
                                      command=lambda:
                                      self.set_dijkstra([y_1.get(), x_1.get(), y_2.get(), x_2.get()],
-                                     self.map))
+                                                       self.map))
 
         button_dijkstra.grid(row=2, column=0)
 
@@ -225,6 +225,6 @@ class KarttaRuutu:
                                 text="IDA-*",
                                 command=lambda:
                                 self.set_ida_star([y_1.get(), x_1.get(), y_2.get(), x_2.get()],
-                                self.map))
+                                                  self.map))
 
         button_ida.grid(row=2, column=1)
