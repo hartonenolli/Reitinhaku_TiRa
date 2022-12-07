@@ -13,6 +13,7 @@ class KarttaRuutu:
         self.x_y_list = ["0", "0", "9", "9"]
         self.save_dijkstra = None
         self.ida_star = None
+        self.map = 1
         self._initialize()
 
     def pack(self):
@@ -21,13 +22,17 @@ class KarttaRuutu:
     def destroy(self):
         self._frame.destroy()
 
-    def set_dijkstra(self):
+    def set_dijkstra(self, value_list, number):
+        self.map = number
         self.save_dijkstra = 1
         self.ida_star = None
+        self._handle_finding_route(value_list, self.map)
 
-    def set_ida_star(self):
+    def set_ida_star(self, value_list, number):
+        self.map = number
         self.ida_star = 1
         self.save_dijkstra = None
+        self._handle_finding_route(value_list, self.map)
 
     """Alustetaan kartta käymällä rivejä läpi,
     jos kartalla on 'o', niin tulee valkoinen,
@@ -35,8 +40,8 @@ class KarttaRuutu:
     Lisäksi, jos valkoisella on valittu alku koordinaatti,
     niin tulee sininen. Punainen tulee loppukoordinaatille."""
 
-    def set_cordinates_for_canvas(self, map_number):
-        show_map = Kartat().maps(map_number)
+    def set_cordinates_for_canvas(self):
+        show_map = Kartat().maps(self.map)
         if self.canvas is not None:
             self.canvas.after(0, self.canvas.destroy())
         self.canvas = Canvas(self._root, width=500, height=500)
@@ -49,9 +54,9 @@ class KarttaRuutu:
         elif self.save_dijkstra == 1:
             print("Lyhyin reitti löydetty:")
             time_starts = datetime.datetime.now()
-            make_map = Dijkstra(map_number).tee_ruudut(self.x_y_list)
+            make_map = Dijkstra(self.map).tee_ruudut(self.x_y_list)
             show_map = Dijkstra(
-                map_number).algoritmi(make_map[0], make_map[1], self.x_y_list)
+                self.map).algoritmi(make_map[0], make_map[1], self.x_y_list)
             time_ends = datetime.datetime.now()
             final_time = time_ends-time_starts
             sekuntit = str(final_time).split(":")
@@ -59,8 +64,8 @@ class KarttaRuutu:
         elif self.ida_star == 1:
             print("lyhin reitti löydetty:")
             time_starts = datetime.datetime.now()
-            tee_kartta = IDA_Star(map_number).tee_ruudut(self.x_y_list)
-            show_map = IDA_Star(map_number).ida_funktio(
+            tee_kartta = IDA_Star(self.map).tee_ruudut(self.x_y_list)
+            show_map = IDA_Star(self.map).ida_funktio(
                 tee_kartta[0], tee_kartta[1], self.x_y_list)
             time_ends = datetime.datetime.now()
             final_time = time_ends-time_starts
@@ -72,10 +77,10 @@ class KarttaRuutu:
         to = 40
         until = 401
 
-        if map_number == 2:
+        if self.map == 2:
             to = 30
             until = 461
-        elif map_number == 3:
+        elif self.map == 3:
             to = 23
             until = 461
 
@@ -104,6 +109,8 @@ class KarttaRuutu:
                 color2 += 1
             color1 += 1
             color2 = 0
+        self.save_dijkstra = None
+        self.ida_star = None
         self.canvas.pack(padx=0, pady=50)
 
     def _handle_finding_route(self, value_list, map_number):
@@ -149,7 +156,8 @@ class KarttaRuutu:
         print(value_list[1], value_list[0])
         print(value_list[3], value_list[2])
         self.x_y_list = value_list
-        self.set_cordinates_for_canvas(map_number)
+        self.map = map_number
+        self.set_cordinates_for_canvas()
 
     """Alustetaan näkymä.
         Tässä asetetaan kaikki elementit paikoilleen.
@@ -207,12 +215,16 @@ class KarttaRuutu:
 
         button_dijkstra = ttk.Button(master=self._frame,
                                      text="Dijkstra",
-                                     command=self.set_dijkstra)
+                                     command=lambda:
+                                     self.set_dijkstra([y_1.get(), x_1.get(), y_2.get(), x_2.get()],
+                                     self.map))
 
         button_dijkstra.grid(row=2, column=0)
 
         button_ida = ttk.Button(master=self._frame,
                                 text="IDA-*",
-                                command=self.set_ida_star)
+                                command=lambda:
+                                self.set_ida_star([y_1.get(), x_1.get(), y_2.get(), x_2.get()],
+                                self.map))
 
         button_ida.grid(row=2, column=1)
