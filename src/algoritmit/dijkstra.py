@@ -1,4 +1,5 @@
 from kartat.kartta1 import Kartat
+from kekokansio.keko import Keko
 import heapq
 
 
@@ -82,14 +83,14 @@ class Dijkstra:
         self.naapurit = naapurit
         self.koordinaatit = koordinaatit
         self.vierailtu = []
-        keko = []
+        keko = Keko()
         polku = []
-        heapq.heappush(
-            keko, (0, f"{self.koordinaatit[1]},{self.koordinaatit[0]}"))
+        keko.lisaa_kekoon((0, f"{self.koordinaatit[1]},{self.koordinaatit[0]}"))
         maali = f"{self.koordinaatit[3]},{self.koordinaatit[2]}"
-        while keko != []:
-            solmu = min(keko)
-            keko.remove(min(keko))
+        while keko.keko_rakenne != []:
+            print(keko.keko_rakenne)
+            solmu = keko.poista_keosta()
+            print(solmu)
             if solmu[1] in self.vierailtu:
                 continue
             self.vierailtu.append(solmu[1])
@@ -98,7 +99,7 @@ class Dijkstra:
                 uusi = self.ruudut[solmu[1]]+1
                 if uusi < nyt:
                     self.ruudut[seuraava] = uusi
-                    heapq.heappush(keko, (uusi, seuraava))
+                    keko.lisaa_kekoon((uusi, seuraava))
 
         print(f"Reitin pituus {self.ruudut[maali]} ruutua")
         alkuun = ""

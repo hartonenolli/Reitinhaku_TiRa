@@ -35,10 +35,11 @@ class KarttaRuutu:
         self._handle_finding_route(value_list, self.map)
 
     """Alustetaan kartta käymällä rivejä läpi,
-    jos kartalla on 'o', niin tulee valkoinen,
-    jos kartalla on 'p', niin tulee musta.
-    Lisäksi, jos valkoisella on valittu alku koordinaatti,
-    niin tulee sininen. Punainen tulee loppukoordinaatille."""
+        jos kartalla on 'o', niin tulee valkoinen,
+        jos kartalla on 'p', niin tulee musta.
+        Lisäksi, jos valkoisella on valittu alku koordinaatti,
+        niin tulee sininen. Punainen tulee loppukoordinaatille.
+    """
 
     def set_cordinates_for_canvas(self):
         show_map = Kartat().maps(self.map)
@@ -128,29 +129,37 @@ class KarttaRuutu:
                 print("Huolitutu arvot 0-9, loppu y väärin. Asetettu 9")
                 value_list[2] = str(9)
         elif map_number == 2:
-            if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]:
+            if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+            "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, alku x väärin. Asetettu 0")
                 value_list[1] = str(0)
-            if str(value_list[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]:
+            if str(value_list[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+            "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, alku y väärin. Asetetu 0")
                 value_list[0] = str(0)
-            if str(value_list[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]:
+            if str(value_list[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+            "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, loppu x väärin. Asetettu 14")
                 value_list[3] = str(14)
-            if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]:
+            if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+            "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, loppu y väärin. Asetettu 14")
                 value_list[2] = str(14)
         else:
-            if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+            if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+            "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
                 print("Huolitutu arvot 0-19, alku x väärin. Asetettu 0")
                 value_list[1] = str(0)
-            if str(value_list[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+            if str(value_list[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+            "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
                 print("Huolitutu arvot 0-19, alku y väärin. Asetetu 0")
                 value_list[0] = str(0)
-            if str(value_list[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+            if str(value_list[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+            "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
                 print("Huolitutu arvot 0-19, loppu x väärin. Asetettu 19")
                 value_list[3] = str(19)
-            if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+            if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+            "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
                 print("Huolitutu arvot 0-19, loppu y väärin. Asetettu 19")
                 value_list[2] = str(19)
         print(value_list[1], value_list[0])
