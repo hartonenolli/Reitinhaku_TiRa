@@ -1,18 +1,35 @@
+
+"""Dijkstran algoritmi kutsuu luokkaa kolmen eri funktion avulla."""
+
 class Keko:
+    """Keko dijkstran algoritmia varten"""
     def __init__(self):
+        """Alustetaan keolle lista"""
         self.keko_rakenne = []
-    
+
     def tarkista_keon_pituus(self, ruutu):
+        """Funktio keon pituuden tarkastamiselle.
+            Jos koen pituus on 1 palautetaan keko sellaisenaan.
+            Jon keon pituus on 2 järjestetään pienempi ensimmäiseksi.
+            Muuten palautetaan: True
+        """
         if len(self.keko_rakenne) == 1:
-            return
-        elif len(self.keko_rakenne) == 2:
+            return False
+        if len(self.keko_rakenne) == 2:
             if ruutu[0] > self.keko_rakenne[1][0]:
                 self.keko_rakenne[0] = self.keko_rakenne[1]
                 self.keko_rakenne[1] = ruutu
-            return
+            return False
         return True
 
     def lisaa_kekoon(self, ruutu):
+        """Keon lisäämisen funktio.
+            Lisätään uusi ruutu keon loppuun.
+            Tarkastetaan vanhemman ja ruudun arvot.
+            Vaihdetaan niiden paikkaa jos vanhempi on isompi.
+            Ylläpidetään näin kekorakennetta.
+            Palautetaan keko listana.
+        """
         if self.keko_rakenne == []:
             self.keko_rakenne.append(ruutu)
             return self.keko_rakenne
@@ -26,8 +43,16 @@ class Keko:
             vanhempi = self.keko_rakenne[kohta//2]
 
         return self.keko_rakenne
-    
+
     def poista_keosta(self):
+        """Funktio pienimmän alkion poistamiselle.
+            Pienin alkio on keon ensimmäisenä.
+            Jos keon pituus on poistamisen jälkeen yli kaksi,
+            niin laitetaan viimeinen alkio ensimmäiseksi.
+            Tarkastetaan vasemman- ja oikean lapsen suhdetta.
+            Näin ylläpidetään kekorakennetta.
+            Palautetaan pienein alkio.
+        """
         if len(self.keko_rakenne) == 1:
             return self.keko_rakenne.pop()
         poistettu = self.keko_rakenne[0]
@@ -67,24 +92,3 @@ class Keko:
                     break
 
         return poistettu
-
-if __name__ == "__main__":
-    testi = Keko()
-    testi.lisaa_kekoon((1, "0,0"))
-    testi.lisaa_kekoon((1, "1,1"))
-    testi.lisaa_kekoon((2, "7,4"))
-    testi.lisaa_kekoon((3, "2,5"))
-    testi.lisaa_kekoon((1, "0,0"))
-    testi.lisaa_kekoon((2, "1,1"))
-    testi.lisaa_kekoon((1, "7,4"))
-    testi.lisaa_kekoon((3, "2,5"))
-    testi.poista_keosta()
-    testi.poista_keosta()
-    testi.poista_keosta()
-    #testi.lisaa_kekoon((10, "7,4"))
-    #testi.lisaa_kekoon((1, "2,5"))
-    testi.poista_keosta()
-    testi.poista_keosta()
-    testi.poista_keosta()
-    testi.poista_keosta()
-    testi.poista_keosta()

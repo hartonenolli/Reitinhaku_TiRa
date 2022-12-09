@@ -1,7 +1,7 @@
 from tkinter import ttk, constants, Canvas
 from kartat.kartta1 import Kartat
 from algoritmit.dijkstra import Dijkstra
-from algoritmit.ida_star import IDA_Star
+from algoritmit.ida_star import IdaStar
 import datetime
 
 
@@ -56,6 +56,7 @@ class KarttaRuutu:
             print("Lyhyin reitti löydetty:")
             time_starts = datetime.datetime.now()
             make_map = Dijkstra(self.map).tee_ruudut(self.x_y_list)
+            print(make_map)
             show_map = Dijkstra(
                 self.map).algoritmi(make_map[0], make_map[1], self.x_y_list)
             time_ends = datetime.datetime.now()
@@ -65,8 +66,8 @@ class KarttaRuutu:
         elif self.ida_star == 1:
             print("lyhin reitti löydetty:")
             time_starts = datetime.datetime.now()
-            tee_kartta = IDA_Star(self.map).tee_ruudut(self.x_y_list)
-            show_map = IDA_Star(self.map).ida_funktio(
+            tee_kartta = IdaStar(self.map).tee_ruudut(self.x_y_list)
+            show_map = IdaStar(self.map).ida_funktio(
                 tee_kartta, self.x_y_list)
             time_ends = datetime.datetime.now()
             final_time = time_ends-time_starts
@@ -104,9 +105,17 @@ class KarttaRuutu:
                 elif show_map[color1][color2] == "r":
                     self.canvas.create_rectangle(
                         j, i, j+to, i+to, fill="yellow")
-                else:
+                elif show_map[color1][color2] == "p":
                     self.canvas.create_rectangle(
                         j, i, j+to, i+to, fill="black")
+                    if str(color1
+                           ) == self.x_y_list[0] and str(color2) == self.x_y_list[1]:
+                        self.canvas.create_rectangle(
+                            j, i, j+to, i+to, fill="grey")
+                    if str(color1
+                           ) == self.x_y_list[2] and str(color2) == self.x_y_list[3]:
+                        self.canvas.create_rectangle(
+                            j, i, j+to, i+to, fill="grey")
                 color2 += 1
             color1 += 1
             color2 = 0
@@ -130,36 +139,36 @@ class KarttaRuutu:
                 value_list[2] = str(9)
         elif map_number == 2:
             if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "11", "12", "13", "14"]:
+                                          "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, alku x väärin. Asetettu 0")
                 value_list[1] = str(0)
             if str(value_list[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "11", "12", "13", "14"]:
+                                          "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, alku y väärin. Asetetu 0")
                 value_list[0] = str(0)
             if str(value_list[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "11", "12", "13", "14"]:
+                                          "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, loppu x väärin. Asetettu 14")
                 value_list[3] = str(14)
             if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "11", "12", "13", "14"]:
+                                          "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, loppu y väärin. Asetettu 14")
                 value_list[2] = str(14)
         else:
             if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+                                          "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
                 print("Huolitutu arvot 0-19, alku x väärin. Asetettu 0")
                 value_list[1] = str(0)
             if str(value_list[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+                                          "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
                 print("Huolitutu arvot 0-19, alku y väärin. Asetetu 0")
                 value_list[0] = str(0)
             if str(value_list[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+                                          "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
                 print("Huolitutu arvot 0-19, loppu x väärin. Asetettu 19")
                 value_list[3] = str(19)
             if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+                                          "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
                 print("Huolitutu arvot 0-19, loppu y väärin. Asetettu 19")
                 value_list[2] = str(19)
         print(value_list[1], value_list[0])

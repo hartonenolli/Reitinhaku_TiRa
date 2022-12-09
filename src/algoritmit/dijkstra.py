@@ -1,36 +1,40 @@
+
+"""Algoritmi, jota kutsutaan karttaruudun kautta"""
+
 from kartat.kartta1 import Kartat
 from kekokansio.keko import Keko
-import heapq
 
 
 class Dijkstra:
-    """Alustetaan algoritmin toimintaan tarvittavat asiat.
-        nodet: sisältää kaikki ruudut ja etäisyydet
-        naapurit: sisältää kaikkien ruutujen viereiset ruudut
-        käydyt: merkataan ruutu käydyksi, kun se on käsitelty
-        dijkstra_kartta: 
-        koordinaatit: aloitus ja lopetuskoordinaatit
-        kartta: mitä karttaa käytetään
-    """
+    """Luokka etsii lyhyimmän reitin Dijkstran algoritmin avulla.
+        Luokka käyttää kekorakennetta kekokansio.keko tiedostoosa olevalla luokalla Keko.
+        Kartta Haetaan kartat.kartta1 tiedostosta Kartta luokasta."""
 
-    def __init__(self, kartta_num, ruudut={}, naapurit={}, koordinaatit=[0, 0, 9, 9]):
-        self.ruudut = ruudut
-        self.naapurit = naapurit
+    def __init__(self, kartta_num):
+        """Alustetaan algoritmin toimintaan tarvittavat asiat.
+            nodet: sisältää kaikki ruudut ja etäisyydet
+            naapurit: sisältää kaikkien ruutujen viereiset ruudut
+            käydyt: merkataan ruutu käydyksi, kun se on käsitelty
+            dijkstra_kartta:
+            koordinaatit: aloitus ja lopetuskoordinaatit
+            kartta: mitä karttaa käytetään
+        """
+        self.ruudut = {}
+        self.naapurit = {}
         self.vierailtu = []
         self.dijkstra_kartta = []
-        self.koordinaatit = koordinaatit
+        self.koordinaatit = None
         self.kartta = Kartat().maps(kartta_num)
 
-    """Tehdään nodet käymällä kartta läpi.
-        Ensin alustetaan alku ja loppu koordinaatteihin.
-        Karttaa käydään läpi kahdella silmukalla
-        Asetetaan jokaiselle valkoiselle ruudulle etäisyys lähtöruudusta = 999
-        Lähtöruudulle annetaan etäisyydeksi = 0
-        Kutsutaan naapurien teko funktiota jokaisella valkoisella ruudulla
-        Kun kaikki ruudut on käyty läpi kutsutaan algoritmifunktiota.
-    """
-
     def tee_ruudut(self, alku_loppu):
+        """Tehdään nodet käymällä kartta läpi.
+            Ensin alustetaan alku ja loppu koordinaatteihin.
+            Karttaa käydään läpi kahdella silmukalla
+            Asetetaan jokaiselle valkoiselle ruudulle etäisyys lähtöruudusta = 999
+            Lähtöruudulle annetaan etäisyydeksi = 0
+            Kutsutaan naapurien teko funktiota jokaisella valkoisella ruudulla
+            Kun kaikki ruudut on käyty läpi kutsutaan algoritmifunktiota.
+        """
         self.koordinaatit = alku_loppu
         for y in range(len(self.kartta)):
             for x in range(len(self.kartta[0])):
@@ -43,54 +47,49 @@ class Dijkstra:
 
         return self.ruudut, self.naapurit
 
-    """Käydään kartan ruudulta läpi naapurit
-        Tarkastetaan ylös, alas, vasen ja oikea
-        jos naapuri on valkoinen ruutu, niin lisätään se naapureihin.
-    """
-
     def tee_naapuri(self, x, y):
+        """Käydään kartan ruudulta läpi naapurit
+            Tarkastetaan ylös, alas, vasen ja oikea
+            jos naapuri on valkoinen ruutu, niin lisätään se naapureihin.
+        """
         self.naapurit[f"{x},{y}"] = []
-        # Handle different directions
-        # left
         if x > 0:
             if self.kartta[y][x-1] != "p":
                 self.naapurit[f"{x},{y}"].append(f"{x-1},{y}")
-        # up
+
         if y > 0:
             if self.kartta[y-1][x] != "p":
                 self.naapurit[f"{x},{y}"].append(f"{x},{y-1}")
-        # right
+
         if x < len(self.kartta[0])-1:
             if self.kartta[y][x+1] != "p":
                 self.naapurit[f"{x},{y}"].append(f"{x+1},{y}")
-        # down
+
         if y < len(self.kartta)-1:
             if self.kartta[y+1][x] != "p":
                 self.naapurit[f"{x},{y}"].append(f"{x},{y+1}")
         return True
 
-    """Algoritmin funktio
-        Asetetaan kekoon alkuruutu etäisyys = 0 ja koordinaatit
-        maali = loppuruudun koordinaatit
-        Käydään kekoa läpi, niin kauan että ollaan käyty kaikki ruudut ja niiden naapurit
-        Lisätään aina käsiteltävä ruutu käytyihin
-        Jos käsiteltävä ruutu on käydyissä, niin ohitetaan se
-        Tarkastellaan pienintä arvoa mitä on maaliruutuun.
-    """
-
     def algoritmi(self, ruudut, naapurit, koordinaatit):
+        """Algoritmin funktio
+            Asetetaan kekoon alkuruutu etäisyys = 0 ja koordinaatit
+            maali = loppuruudun koordinaatit
+            Käydään kekoa läpi, niin kauan että ollaan käyty kaikki ruudut ja niiden naapurit
+            Lisätään aina käsiteltävä ruutu käytyihin
+            Jos käsiteltävä ruutu on käydyissä, niin ohitetaan se
+            Tarkastellaan pienintä arvoa mitä on maaliruutuun.
+        """
         self.ruudut = ruudut
         self.naapurit = naapurit
         self.koordinaatit = koordinaatit
-        self.vierailtu = []
+        #self.vierailtu = []
         keko = Keko()
         polku = []
-        keko.lisaa_kekoon((0, f"{self.koordinaatit[1]},{self.koordinaatit[0]}"))
+        keko.lisaa_kekoon(
+            (0, f"{self.koordinaatit[1]},{self.koordinaatit[0]}"))
         maali = f"{self.koordinaatit[3]},{self.koordinaatit[2]}"
         while keko.keko_rakenne != []:
-            print(keko.keko_rakenne)
             solmu = keko.poista_keosta()
-            print(solmu)
             if solmu[1] in self.vierailtu:
                 continue
             self.vierailtu.append(solmu[1])
@@ -113,6 +112,12 @@ class Dijkstra:
                     aikaisempi_ruutu = self.ruudut[previous]
                     continue
 
+        return self.kartan_palautus(polku)
+
+    def kartan_palautus(self, polku):
+        """Kartan tekevä funktio.
+            Asetetaan reitti kartalle merkkaamalla se r kirjaimella
+        """
         rivi = ""
         for y in range(len(self.kartta)):
             for x in range(len(self.kartta[0])):

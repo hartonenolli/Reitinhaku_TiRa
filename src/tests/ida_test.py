@@ -1,12 +1,12 @@
 import unittest
-from algoritmit.ida_star import IDA_Star
+from algoritmit.ida_star import IdaStar
 from tests.test_assets.d_assets import Assets
 
 
 class TestDijkstra(unittest.TestCase):
     def setUp(self):
-        self.kartta_1 = IDA_Star(1)
-        self.kartta_testeille = IDA_Star(4)
+        self.kartta_1 = IdaStar(1)
+        self.kartta_testeille = IdaStar(4)
 
     def test_start_True(self):
         self.assertTrue(self.kartta_1)
@@ -26,7 +26,7 @@ class TestDijkstra(unittest.TestCase):
                           '0,1': ['0,0', '1,1'], '1,1': ['0,1', '1,0']})
 
     def test_algoritmi(self):
-        tulos = IDA_Star(4).ida_funktio(
+        tulos = IdaStar(4).ida_funktio(
             {'0,0': ['1,0', '0,1'], '1,0': ['0,0', '1,1'],
              '0,1': ['0,0', '1,1'], '1,1': ['0,1', '1,0']}, [0, 0, 1, 1])
         self.assertEqual(tulos, ['or', 'oo'])

@@ -1,31 +1,27 @@
 from kartat.kartta1 import Kartat
 
 
-class IDA_Star:
+class IdaStar:
     def __init__(self, nyky_kartta):
         self.kartta = Kartat().maps(nyky_kartta)
         self.alku = "0,0"
-        self.loppu = "2,2"
+        self.loppu = "9,9"
         self.koordinaatit = None
-        #self.ruudut = {}
         self.naapurit = {}
         self.tarkastettu = []
-        self.matka = 0
-        self.ida_star_map = []
         self.katsottu = []
 
-    """Käydään läpi karttaa.
-        Kaikille ruuduille, jotka eivät ole 'p' tehdään naapurit.
-        Funktiolle annetaan lista, jossa on alku ja loppu koordinaatit.
-        Esimerkki:
-        ['0', '0', '9', '9']
-        Kutsutaan tee_naapurit funktiota.
-        Palautetaan sanakirja, jossa on ruutujen naapurit listassa.
-        Esimerkki:
-        {'0,0': ['1,0','0,1'], '1,0': ['0,0', '2,0', '1,2']}
-    """
-
     def tee_ruudut(self, alku_ja_loppu):
+        """Käydään läpi karttaa.
+            Kaikille ruuduille, jotka eivät ole 'p' tehdään naapurit.
+            Funktiolle annetaan lista, jossa on alku ja loppu koordinaatit.
+            Esimerkki:
+            ['0', '0', '9', '9']
+            Kutsutaan tee_naapurit funktiota.
+            Palautetaan sanakirja, jossa on ruutujen naapurit listassa.
+            Esimerkki:
+            {'0,0': ['1,0','0,1'], '1,0': ['0,0', '2,0', '1,2']}
+        """
         self.koordinaatit = alku_ja_loppu
         for y in range(len(self.kartta)):
             for x in range(len(self.kartta[0])):
@@ -34,17 +30,16 @@ class IDA_Star:
 
         return self.naapurit
 
-    """Käydään läpi yksittäisen ruudun naapurit.
-        Tarkastetaan vasen, oikea, ylä ja ala ruudut.
-        Tehdään kutsutulle ruudulle sanakirjaan avain.
-        Lisätään naapurit listana.
-        Annetut arvot esimerkkinä:
-        0, 0
-        Tehty sanakirja esimerkkinä:
-        {'0,0': ['1,0','0,1']}
-    """
-
     def tee_naapuri(self, x, y):
+        """Käydään läpi yksittäisen ruudun naapurit.
+            Tarkastetaan vasen, oikea, ylä ja ala ruudut.
+            Tehdään kutsutulle ruudulle sanakirjaan avain.
+            Lisätään naapurit listana.
+            Annetut arvot esimerkkinä:
+            0, 0
+            Tehty sanakirja esimerkkinä:
+            {'0,0': ['1,0','0,1']}
+        """
         self.naapurit[f"{x},{y}"] = []
 
         if x > 0:
@@ -64,16 +59,14 @@ class IDA_Star:
                 self.naapurit[f"{x},{y}"].append(f"{x},{y+1}")
         return True
 
-    """Algoritmifunktio, joka aloittaa algoritmin.
-        Alustetaan naapurit. Merkataan alku ja loppu.
-        Kutsutaan heurestisen arvon funktiota, jolla saadaan laskettu etäisyys.
-        
-        Silmukan avulla kutsutaan rekursiivista funktiota ja aloitetaan reitin etsintä.
-        Kun reitti on löytynyt poistutaan silmukasta ja palautetaan kartan_palautus
-        funktion arvo.
-    """
-
     def ida_funktio(self, naapureita, koordinaatti):
+        """Algoritmifunktio, joka aloittaa algoritmin.
+            Alustetaan naapurit. Merkataan alku ja loppu.
+            Kutsutaan heurestisen arvon funktiota, jolla saadaan laskettu etäisyys.
+            Silmukan avulla kutsutaan rekursiivista funktiota ja aloitetaan reitin etsintä.
+            Kun reitti on löytynyt poistutaan silmukasta ja palautetaan kartan_palautus
+            funktion arvo.
+        """
         self.naapurit = naapureita
         self.alku = f"{koordinaatti[1]},{koordinaatti[0]}"
         self.loppu = f"{koordinaatti[3]},{koordinaatti[2]}"
@@ -82,7 +75,7 @@ class IDA_Star:
         raja = self.heurestinen_arvo(start, fin)
         while True:
             ruudun_tila = self.etsi(start, 0, raja, fin)
-            if ruudun_tila == True:
+            if ruudun_tila is True:
                 print(len(self.tarkastettu))
                 break
             if ruudun_tila >= 999:
@@ -91,21 +84,20 @@ class IDA_Star:
         print(f"Reitin pituus {len(self.tarkastettu)} ruutua")
         return self.kartan_palautus(start, fin)
 
-    """Rekursiivinen etsintäfunktio algoritmille.
-        Lasketaan ensin kysisen ruudun etäisyys.
-        Jos etäisyys on edellistä huonompi palautetaan edellinen.
-        Jos ollaan saavuttu maaliin, niin voidaan poistua silmuksta.
-        
-        Käydään ruudun naapureita läpi ja kutsutaan niitä samalla rekursiivisella funktiolla.
-        Löytämällä maalin lopetetaan silmukka.
-        min_arvon avulla pidetään reitin etäisyyttä yllä.
-        Palautetaan reitin etäisyys.
-
-        Funktiolle annetaan:
-            Tutkittava ruutu, ruudun etäisyys alusta, loppuetäisyys, loppuruutu
-    """
-
     def etsi(self, node, maara, raja, fin):
+        """Rekursiivinen etsintäfunktio algoritmille.
+            Lasketaan ensin kysisen ruudun etäisyys.
+            Jos etäisyys on edellistä huonompi palautetaan edellinen.
+            Jos ollaan saavuttu maaliin, niin voidaan poistua silmuksta.
+
+            Käydään ruudun naapureita läpi ja kutsutaan niitä samalla rekursiivisella funktiolla.
+            Löytämällä maalin lopetetaan silmukka.
+            min_arvon avulla pidetään reitin etäisyyttä yllä.
+            Palautetaan reitin etäisyys.
+
+            Funktiolle annetaan:
+                Tutkittava ruutu, ruudun etäisyys alusta, loppuetäisyys, loppuruutu
+        """
         f = maara+self.heurestinen_arvo(node, fin)
         if f > raja:
             return f
@@ -119,8 +111,7 @@ class IDA_Star:
             if naapuri not in self.tarkastettu:
                 self.tarkastettu.append(naapuri)
                 etsi_naapuri = self.etsi(naapuri, maara+1, raja, fin)
-                if etsi_naapuri == True:
-                    self.matka += 1
+                if etsi_naapuri is True:
                     return True
                 if etsi_naapuri < min_arvo:
                     min_arvo = etsi_naapuri
@@ -128,9 +119,8 @@ class IDA_Star:
 
         return min_arvo
 
-    """Funktio laskee tutukittavan ruudun ja lopun heurestisen etäisyyden."""
-
     def heurestinen_arvo(self, ruutu, loppu):
+        """Funktio laskee tutukittavan ruudun ja lopun heurestisen etäisyyden."""
         arvot_alku = ruutu.split(",")
         arvot_loppu = loppu.split(",")
 
@@ -138,13 +128,13 @@ class IDA_Star:
         ruutu_y = abs(int(arvot_alku[1]) - int(arvot_loppu[1]))
         return ruutu_x+ruutu_y
 
-    """Funktio palauttaa muokatun kartan.
-        Reitti merkataan r-kirjaimella.
-        Kartalle merkataan kaikki ruudut, jossa algoritmi on käynyt d-kirjaimella.
-    """
-
     def kartan_palautus(self, start, fin):
+        """Funktio palauttaa muokatun kartan.
+            Reitti merkataan r-kirjaimella.
+            Kartalle merkataan kaikki ruudut, jossa algoritmi on käynyt d-kirjaimella.
+        """
         row = ""
+        ida_star_map = []
         for y in range(len(self.kartta)):
             for x in range(len(self.kartta[0])):
                 if self.kartta[y][x] == "p":
@@ -159,6 +149,6 @@ class IDA_Star:
                     row += "d"
                 else:
                     row += "o"
-            self.ida_star_map.append(row)
+            ida_star_map.append(row)
             row = ""
-        return self.ida_star_map
+        return ida_star_map

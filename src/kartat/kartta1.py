@@ -1,5 +1,14 @@
+
+"""Karttaruutu ja algoritmit hakevat kartat täältä
+    kartta palautetaan yhden funktion avulla
+"""
+
 class Kartat:
+
     def __init__(self):
+        """Alustetaan kolme käytössä olevaa karttaa ja
+            testissä oleva kartta
+        """
         self.map1 = [
             "ooopoooppo",
             "oooppooopo",
@@ -51,6 +60,9 @@ class Kartat:
         self.map_test = ["oo", "oo"]
 
     def maps(self, map_number):
+        """Funktio kartan palauttamista varten.
+            Kutsutaan kartan numerolla ja palautetaan vastaava kartta
+        """
         if map_number == 1:
             return self.map1
         if map_number == 2:

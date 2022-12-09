@@ -1,0 +1,23 @@
+[MASTER]
+
+ignore=tests
+
+[MESSAGE CONTROL]
+
+disable=missing-module-docstring,
+        missing-function-docstring,
+        missing-class-docstring
+
+
+[SIMILARITIES]
+
+min-similarity-lines=20
+
+[BASIC]
+
+good-names=i,
+           j,
+           x,
+           y,
+           to,
+           f
