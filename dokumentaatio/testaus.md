@@ -1,4 +1,11 @@
 # Testaus
 
-## Testaus 26.11
-- Toistaiseksi testaus on 93% dijkstaran algoritmissa. Laitan kuvaa kun on aiheellista.
+## Testaustilanne
+
+![coveragekuva](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/kuvat/coveragekuva.png)
+
+# Testaus toteutus
+
+Automaattisia testejä tehty algoritmeihin. Kekorakenne testaantuu dijkstran algoritmin testejen avulla.
+
+Käyttoliittyma.py, karttaruutu.py ja karttoja ei ole testattu automaattisesti.
