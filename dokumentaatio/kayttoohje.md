@@ -20,3 +20,9 @@
 - Ohjelma näyttää visuaalisesti lyhimmän reitin, mikä sen pituus on ja kuinka nopeasti se löydettiin
   - Reitin pituus ja aika sen löytämiselle tulostetaan **Terminaalissa**
 - Ohjelmasta voi poistua painamalla ruksia oikeassa yläkulmassa
+
+## Muuta
+- Testit saat komennolla: ***poetry run invoke test***
+- Testikattavuuden saa kerättyä: ***poetry run invoke coveragereport***
+  - Testikattavuus löytyy htmlcov/index.html tiedostosta
+- Pylintin käynnistys: ***poetry run invoke lint***
