@@ -6,6 +6,6 @@
 
 # Testaus toteutus
 
-Automaattisia testejä tehty algoritmeihin. Kekorakenne testaantuu dijkstran algoritmin testejen avulla.
+Automaattisia testejä tehty algoritmeihin. Kekorakenne testaantuu dijkstran algoritmin testejen avulla. On pyritty saamaan poikkeavia syötteitä testeille.
 
-Käyttoliittyma.py, karttaruutu.py ja karttoja ei ole testattu automaattisesti.
+kayttoliittyma.py, karttaruutu.py ja karttoja ei ole testattu automaattisesti. Käyttöliittymän ja karttaruudun automaattinen testaus ei onnistu, mutta manuaalista testausta on suoritettu. Manuaalisissa testeissä on pyritty mm. laittamaan mahdollisimman kummallisia syötteita, painelemaan nappuloita useasti
