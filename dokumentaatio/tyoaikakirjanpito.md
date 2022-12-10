@@ -71,3 +71,15 @@
 ## 3.12
 - 1h
 - Koodin siistiminen
+
+## 6.12
+- 2h
+- Tehty testit ida-starille ja muokattu task toimivaksi
+
+## 7.12
+- 2h
+- Käyttöliittymä selkeytetty ja kommentteja lisätty
+
+## 9.12
+- 3h
+- Tehty kekorakenne Dijkstran algoritmille ja pylint taso nostettu yli 9.5
