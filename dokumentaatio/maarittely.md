@@ -6,14 +6,22 @@ Ohjelman tarkoitus on vertailla eri reitinhakualgoritmeja
 
 Tarkoituksena on toteuttaa:
 - Dijkstran algoritmi
+  - Kekorakenne tälle
 - IDA*
 
 ## Ohjelman rakenne
 
-Ohjelmassa on graafinen käyttöliittymä totetettu tkinterillä. Käyttöliittymän avulla pystytään näyttämään verkkomaiset rakenteet, jossa algoritmi toimii.
-Algoritmit ja kartat ovat omassa kansioissaan, josta käyttöliittymä niitä hakee, kun reittiä halutaan etsiä.
+Ohjelmassa on graafinen käyttöliittymä totetettu tkinterillä. Käyttöliittymän avulla pystytään näyttämään verkkomaiset rakenteet ja reitin etsiminen kartalla.
+
+Algoritmeille, keolle ja kartoille on oat luokkansa.
+
+Kun reittiä halutaan etsiä kutsutaan karttaruudusta valitun algoritmin luokkaa.
+
+Karttana toimii lista, jossa on str-muodossa kirjaimia. Kirjain kertoo mitä ruudulle halutaan piirtää.
+- Eri vaihtoehtoja on: käytävä, seinä, alku, loppu, reitti, tarkastettu tai huono valinta
+
 Algoritmien tehokkuutta verrataan suoritusajalla.
-Ohlemaan annetaan syötteenä reitinhaun aloituskoordinaatit ja lopetuskoordinaatit.
+- Ajan ja reitin tulostus tapahtuu terminaalissa.
 
 ## Opintoohjelmani:
 - Tietojenkäsittelytieteen kandidaatti (TKT)
