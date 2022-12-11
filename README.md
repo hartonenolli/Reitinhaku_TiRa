@@ -1,6 +1,6 @@
 # Reitinhakualgoritmit (Pyhton)
 
-![GHA-Merkki](https://github.com/hartonenolli/Reitinhaku_TiRa/workflows/CI/badge.svg)
+[![CI](https://github.com/hartonenolli/Reitinhaku_TiRa/actions/workflows/master.yml/badge.svg)](https://github.com/hartonenolli/Reitinhaku_TiRa/actions/workflows/master.yml)
 
 Testataan eri reitinhakualgoritmien tehokkuuksia
 
