@@ -1,4 +1,5 @@
 from tkinter import Tk
+import sv_ttk
 from karttaruutu import KarttaRuutu
 
 
@@ -20,6 +21,8 @@ class Kayttoliittyma:
 
 window = Tk()
 window.title("Reitinhaku")
+
+sv_ttk.set_theme("dark")
 
 ui = Kayttoliittyma(window)
 ui.start()
