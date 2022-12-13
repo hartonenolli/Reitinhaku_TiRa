@@ -82,7 +82,6 @@ class Dijkstra:
         self.ruudut = ruudut
         self.naapurit = naapurit
         self.koordinaatit = koordinaatit
-        #self.vierailtu = []
         keko = Keko()
         polku = []
         keko.lisaa_kekoon(

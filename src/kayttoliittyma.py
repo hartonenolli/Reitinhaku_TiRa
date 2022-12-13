@@ -2,26 +2,26 @@ from tkinter import Tk
 from karttaruutu import KarttaRuutu
 
 
-class UserInterface:
+class Kayttoliittyma:
     def __init__(self, root):
-        self._root = root
-        self._current_view = None
+        self._juuri = root
+        self._nakyma = None
 
     def start(self):
-        self._map_screen()
+        self._kartta_ruutu()
 
-    def _map_screen(self):
-        self._current_view = KarttaRuutu(
-            self._root
+    def _kartta_ruutu(self):
+        self._nakyma = KarttaRuutu(
+            self._juuri
         )
 
-        self._current_view.pack()
+        self._nakyma.pack()
 
 
 window = Tk()
 window.title("Reitinhaku")
 
-ui = UserInterface(window)
+ui = Kayttoliittyma(window)
 ui.start()
 
 window.mainloop()

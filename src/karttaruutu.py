@@ -1,3 +1,9 @@
+
+"""KarttaRuutu luokka alustaa käyttöliittymän.
+    Kutsutaan käytettäviä karttoja Kartat luokasta.
+    Algoritmeja kutsutaan omista luokistaan.
+"""
+
 from tkinter import ttk, constants, Canvas
 from kartat.kartta1 import Kartat
 from algoritmit.dijkstra import Dijkstra
@@ -6,243 +12,255 @@ import datetime
 
 
 class KarttaRuutu:
-    def __init__(self, root):
-        self._root = root
-        self._frame = None
-        self.canvas = None
-        self.x_y_list = ["0", "0", "9", "9"]
-        self.save_dijkstra = None
-        self.ida_star = None
-        self.map = 1
-        self._initialize()
-
-    def pack(self):
-        self._frame.pack(fill=constants.X)
-
-    def destroy(self):
-        self._frame.destroy()
-
-    def set_dijkstra(self, value_list, number):
-        self.map = number
-        self.save_dijkstra = 1
-        self.ida_star = None
-        self._handle_finding_route(value_list, self.map)
-
-    def set_ida_star(self, value_list, number):
-        self.map = number
-        self.ida_star = 1
-        self.save_dijkstra = None
-        self._handle_finding_route(value_list, self.map)
-
-    """Alustetaan kartta käymällä rivejä läpi,
-        jos kartalla on 'o', niin tulee valkoinen,
-        jos kartalla on 'p', niin tulee musta.
-        Lisäksi, jos valkoisella on valittu alku koordinaatti,
-        niin tulee sininen. Punainen tulee loppukoordinaatille.
+    """Käyttäjälle avataan näkymä, josta voi valita käytettäväksi:
+        kartan, alun- ja lopun koordinaatiyt ja millä algoritmilla
+        reitti haetaan.
     """
 
-    def set_cordinates_for_canvas(self):
-        show_map = Kartat().maps(self.map)
-        if self.canvas is not None:
-            self.canvas.after(0, self.canvas.destroy())
-        self.canvas = Canvas(self._root, width=500, height=500)
-        if show_map[int(self.x_y_list[0])][int(self.x_y_list[1])] == "p":
-            print("Start is not correct!")
-            self._initialize()
-        elif show_map[int(self.x_y_list[2])][int(self.x_y_list[3])] == "p":
-            print("End is not correct!")
-            self._initialize()
-        elif self.save_dijkstra == 1:
+    def __init__(self, root):
+        self._juuri = root
+        self._freimi = None
+        self.kanvas = None
+        self.x_y_lista = ["0", "0", "9", "9"]
+        self.dijkstra = None
+        self.ida_star = None
+        self.kartta = 1
+        self._alusta()
+
+    def pack(self):
+        self._freimi.pack(fill=constants.X)
+
+    def destroy(self):
+        self._freimi.destroy()
+
+    def aseta_dijkstra(self, koordinaatit, number):
+        """Funktio dijkstran algoritmin etsimisen alustamiseksi."""
+        self.kartta = number
+        self.dijkstra = 1
+        self.ida_star = None
+        self._tarkasta_koordinaatit(koordinaatit, self.kartta)
+
+    def set_ida_star(self, koordinaatit, number):
+        """Funktio ida-* algoritmin etsimisen alustamiseksi."""
+        self.kartta = number
+        self.ida_star = 1
+        self.dijkstra = None
+        self._tarkasta_koordinaatit(koordinaatit, self.kartta)
+
+    def aseta_koordinaatit_kanvakselle(self):
+        """Alustetaan kartta käymällä rivejä läpi,
+            jos kartalla on 'o', niin tulee valkoinen,
+            jos kartalla on 'p', niin tulee musta.
+            Lisäksi, jos valkoisella on valittu alku koordinaatti,
+            niin tulee sininen. Punainen tulee loppukoordinaatille.
+        """
+        nayta_kartta = Kartat().maps(self.kartta)
+        if self.kanvas is not None:
+            self.kanvas.after(0, self.kanvas.destroy())
+        self.kanvas = Canvas(self._juuri, width=500, height=500)
+        if nayta_kartta[int(self.x_y_lista[0])][int(self.x_y_lista[1])] == "p":
+            print("Alku ei ole oikein!")
+            self._alusta()
+        elif nayta_kartta[int(self.x_y_lista[2])][int(self.x_y_lista[3])] == "p":
+            print("Loppu ei ole oikein!")
+            self._alusta()
+        elif self.dijkstra == 1:
             print("Lyhyin reitti löydetty:")
-            time_starts = datetime.datetime.now()
-            make_map = Dijkstra(self.map).tee_ruudut(self.x_y_list)
-            print(make_map)
-            show_map = Dijkstra(
-                self.map).algoritmi(make_map[0], make_map[1], self.x_y_list)
-            time_ends = datetime.datetime.now()
-            final_time = time_ends-time_starts
-            sekuntit = str(final_time).split(":")
+            aika_alkaa = datetime.datetime.now()
+            tee_kartta = Dijkstra(self.kartta).tee_ruudut(self.x_y_lista)
+            nayta_kartta = Dijkstra(
+                self.kartta).algoritmi(tee_kartta[0], tee_kartta[1], self.x_y_lista)
+            aika_loppuu = datetime.datetime.now()
+            lopullinen_aika = aika_loppuu-aika_alkaa
+            sekuntit = str(lopullinen_aika).split(":")
             print(f"Reitti löytyi ajassa {sekuntit[-1]}s")
         elif self.ida_star == 1:
-            print("lyhin reitti löydetty:")
-            time_starts = datetime.datetime.now()
-            tee_kartta = IdaStar(self.map).tee_ruudut(self.x_y_list)
-            show_map = IdaStar(self.map).ida_funktio(
-                tee_kartta, self.x_y_list)
-            time_ends = datetime.datetime.now()
-            final_time = time_ends-time_starts
-            sekuntit = str(final_time).split(":")
+            print("Lyhin reitti löydetty:")
+            aika_alkaa = datetime.datetime.now()
+            tee_kartta = IdaStar(self.kartta).tee_ruudut(self.x_y_lista)
+            nayta_kartta = IdaStar(self.kartta).ida_funktio(
+                tee_kartta, self.x_y_lista)
+            aika_loppuu = datetime.datetime.now()
+            lopullinen_aika = aika_loppuu-aika_alkaa
+            sekuntit = str(lopullinen_aika).split(":")
             print(f"Reitti löytyi ajassa {sekuntit[-1]}s")
-        color1 = 0
-        color2 = 0
+        y_koordinaatti = 0
+        x_koordinaatti = 0
 
-        to = 40
-        until = 401
+        mista = 40
+        mihin = 401
 
-        if self.map == 2:
-            to = 30
-            until = 461
-        elif self.map == 3:
-            to = 23
-            until = 461
+        if self.kartta == 2:
+            mista = 30
+            mihin = 461
+        elif self.kartta == 3:
+            mista = 23
+            mihin = 461
 
-        for i in range(to, until, to):
-            for j in range(to, until, to):
-                if show_map[color1][color2] == "o":
-                    self.canvas.create_rectangle(
-                        j, i, j+to, i+to, fill="white")
-                    if str(color1
-                           ) == self.x_y_list[0] and str(color2) == self.x_y_list[1]:
-                        self.canvas.create_rectangle(
-                            j, i, j+to, i+to, fill="blue")
-                    if str(color1
-                           ) == self.x_y_list[2] and str(color2) == self.x_y_list[3]:
-                        self.canvas.create_rectangle(
-                            j, i, j+to, i+to, fill="red")
-                elif show_map[color1][color2] == "d":
-                    self.canvas.create_rectangle(
-                        j, i, j+to, i+to, fill="green")
-                elif show_map[color1][color2] == "r":
-                    self.canvas.create_rectangle(
-                        j, i, j+to, i+to, fill="yellow")
-                elif show_map[color1][color2] == "p":
-                    self.canvas.create_rectangle(
-                        j, i, j+to, i+to, fill="black")
-                    if str(color1
-                           ) == self.x_y_list[0] and str(color2) == self.x_y_list[1]:
-                        self.canvas.create_rectangle(
-                            j, i, j+to, i+to, fill="grey")
-                    if str(color1
-                           ) == self.x_y_list[2] and str(color2) == self.x_y_list[3]:
-                        self.canvas.create_rectangle(
-                            j, i, j+to, i+to, fill="grey")
-                color2 += 1
-            color1 += 1
-            color2 = 0
-        self.save_dijkstra = None
+        for i in range(mista, mihin, mista):
+            for j in range(mista, mihin, mista):
+                if nayta_kartta[y_koordinaatti][x_koordinaatti] == "o":
+                    self.kanvas.create_rectangle(
+                        j, i, j+mista, i+mista, fill="white")
+                    if str(y_koordinaatti
+                           ) == self.x_y_lista[0] and str(x_koordinaatti) == self.x_y_lista[1]:
+                        self.kanvas.create_rectangle(
+                            j, i, j+mista, i+mista, fill="blue")
+                    if str(y_koordinaatti
+                           ) == self.x_y_lista[2] and str(x_koordinaatti) == self.x_y_lista[3]:
+                        self.kanvas.create_rectangle(
+                            j, i, j+mista, i+mista, fill="red")
+                elif nayta_kartta[y_koordinaatti][x_koordinaatti] == "d":
+                    self.kanvas.create_rectangle(
+                        j, i, j+mista, i+mista, fill="green")
+                elif nayta_kartta[y_koordinaatti][x_koordinaatti] == "r":
+                    self.kanvas.create_rectangle(
+                        j, i, j+mista, i+mista, fill="yellow")
+                elif nayta_kartta[y_koordinaatti][x_koordinaatti] == "p":
+                    self.kanvas.create_rectangle(
+                        j, i, j+mista, i+mista, fill="black")
+                    if str(y_koordinaatti
+                           ) == self.x_y_lista[0] and str(x_koordinaatti) == self.x_y_lista[1]:
+                        self.kanvas.create_rectangle(
+                            j, i, j+mista, i+mista, fill="grey")
+                    if str(y_koordinaatti
+                           ) == self.x_y_lista[2] and str(x_koordinaatti) == self.x_y_lista[3]:
+                        self.kanvas.create_rectangle(
+                            j, i, j+mista, i+mista, fill="grey")
+                x_koordinaatti += 1
+            y_koordinaatti += 1
+            x_koordinaatti = 0
+        self.dijkstra = None
         self.ida_star = None
-        self.canvas.pack(padx=0, pady=50)
+        self.kanvas.pack(padx=0, pady=50)
 
-    def _handle_finding_route(self, value_list, map_number):
-        if map_number == 1:
-            if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+    def _tarkasta_koordinaatit(self, koordinaatit, kartta_numero):
+        """Tarkastetaan annetut koordinaattien syötteet.
+            Jos syöte ei ole oikean muotoinen, niin asetetaan oletusarvot.
+            Syötteet annetaan listana ja karttanumero kertoo
+            kuinka iso syöte voi olla.
+        """
+        if kartta_numero == 1:
+            if str(koordinaatit[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
                 print("Huolitutu arvot 0-9, alku x väärin. Asetettu 0")
-                value_list[1] = str(0)
-            if str(value_list[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+                koordinaatit[1] = str(0)
+            if str(koordinaatit[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
                 print("Huolitutu arvot 0-9, alku y väärin. Asetetu 0")
-                value_list[0] = str(0)
-            if str(value_list[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+                koordinaatit[0] = str(0)
+            if str(koordinaatit[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
                 print("Huolitutu arvot 0-9, loppu x väärin. Asetettu 9")
-                value_list[3] = str(9)
-            if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+                koordinaatit[3] = str(9)
+            if str(koordinaatit[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
                 print("Huolitutu arvot 0-9, loppu y väärin. Asetettu 9")
-                value_list[2] = str(9)
-        elif map_number == 2:
-            if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                koordinaatit[2] = str(9)
+        elif kartta_numero == 2:
+            if str(koordinaatit[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                                           "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, alku x väärin. Asetettu 0")
-                value_list[1] = str(0)
-            if str(value_list[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                koordinaatit[1] = str(0)
+            if str(koordinaatit[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                                           "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, alku y väärin. Asetetu 0")
-                value_list[0] = str(0)
-            if str(value_list[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                koordinaatit[0] = str(0)
+            if str(koordinaatit[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                                           "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, loppu x väärin. Asetettu 14")
-                value_list[3] = str(14)
-            if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                koordinaatit[3] = str(14)
+            if str(koordinaatit[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                                           "10", "11", "12", "13", "14"]:
                 print("Huolitutu arvot 0-14, loppu y väärin. Asetettu 14")
-                value_list[2] = str(14)
+                koordinaatit[2] = str(14)
         else:
-            if str(value_list[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+            if str(koordinaatit[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                                           "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
                 print("Huolitutu arvot 0-19, alku x väärin. Asetettu 0")
-                value_list[1] = str(0)
-            if str(value_list[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                koordinaatit[1] = str(0)
+            if str(koordinaatit[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                                           "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
                 print("Huolitutu arvot 0-19, alku y väärin. Asetetu 0")
-                value_list[0] = str(0)
-            if str(value_list[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                koordinaatit[0] = str(0)
+            if str(koordinaatit[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                                           "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
                 print("Huolitutu arvot 0-19, loppu x väärin. Asetettu 19")
-                value_list[3] = str(19)
-            if str(value_list[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                koordinaatit[3] = str(19)
+            if str(koordinaatit[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                                           "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
                 print("Huolitutu arvot 0-19, loppu y väärin. Asetettu 19")
-                value_list[2] = str(19)
-        print(value_list[1], value_list[0])
-        print(value_list[3], value_list[2])
-        self.x_y_list = value_list
-        self.map = map_number
-        self.set_cordinates_for_canvas()
+                koordinaatit[2] = str(19)
+        print("Valitut koordinaatit:")
+        print(f"Alku:  {koordinaatit[1]:2} {koordinaatit[0]}")
+        print(f"Loppu: {koordinaatit[3]:2} {koordinaatit[2]}")
+        self.x_y_lista = koordinaatit
+        self.kartta = kartta_numero
+        self.aseta_koordinaatit_kanvakselle()
 
-    """Alustetaan näkymä.
-        Tässä asetetaan kaikki elementit paikoilleen.
-        Painamalla Kartta painikkeita saa kartat näkyviin.
-        Painamalla Dijkstra painiketta ennen kartta painiketta
-        aloitetaan reitinhaku algoritmilla."""
+    def _alusta(self):
+        """Alustetaan näkymä.
+            Tässä asetetaan kaikki elementit paikoilleen.
+            Painamalla Kartta painikkeita saa kartat näkyviin.
+            Painamalla Dijkstra painiketta ennen kartta painiketta
+            aloitetaan reitinhaku algoritmilla.
+            Painamalla ida-* painiketta aloitetaan reitinhaku algoritmilla.
+        """
+        self._freimi = ttk.Frame(master=self._juuri)
+        label = ttk.Label(master=self._freimi, text="Reitin haku")
+        label_alulle = ttk.Label(
+            master=self._freimi, text="Aloituskoordinaatti")
+        label_lopulle = ttk.Label(
+            master=self._freimi, text="Lopetuskoordinaatti")
 
-    def _initialize(self):
-        self._frame = ttk.Frame(master=self._root)
-        label = ttk.Label(master=self._frame, text="Reitin haku")
-        label_for_start = ttk.Label(
-            master=self._frame, text="Aloituskoordinaatti")
-        label_for_finish = ttk.Label(
-            master=self._frame, text="Lopetuskoordinaatti")
-
-        x_1 = ttk.Entry(master=self._frame)
-        y_1 = ttk.Entry(master=self._frame)
-        x_2 = ttk.Entry(master=self._frame)
-        y_2 = ttk.Entry(master=self._frame)
+        x_1 = ttk.Entry(master=self._freimi)
+        y_1 = ttk.Entry(master=self._freimi)
+        x_2 = ttk.Entry(master=self._freimi)
+        y_2 = ttk.Entry(master=self._freimi)
 
         label.grid(row=0, column=0)
-        label_for_start.grid(row=3, column=0)
+        label_alulle.grid(row=3, column=0)
         x_1.grid(row=3, column=1)
         y_1.grid(row=3, column=2)
-        label_for_finish.grid(row=4, column=0)
+        label_lopulle.grid(row=4, column=0)
         x_2.grid(row=4, column=1)
         y_2.grid(row=4, column=2)
 
-        button = ttk.Button(
-            master=self._frame,
+        painike_1 = ttk.Button(
+            master=self._freimi,
             text="Kartta1",
-            command=lambda: self._handle_finding_route(
+            command=lambda: self._tarkasta_koordinaatit(
                 [y_1.get(), x_1.get(), y_2.get(), x_2.get()], 1)
         )
 
-        button.grid(row=1, column=0)
+        painike_1.grid(row=1, column=0)
 
-        button_map = ttk.Button(master=self._frame,
+        painike_2 = ttk.Button(master=self._freimi,
                                 text="Kartta2",
                                 command=lambda:
-                                self._handle_finding_route(
+                                self._tarkasta_koordinaatit(
                                     [y_1.get(), x_1.get(), y_2.get(), x_2.get()],
                                     2))
 
-        button_map.grid(row=1, column=1)
+        painike_2.grid(row=1, column=1)
 
-        button_3 = ttk.Button(master=self._frame,
+        painike_3 = ttk.Button(master=self._freimi,
                               text="Kartta3",
                               command=lambda:
-                              self._handle_finding_route(
+                              self._tarkasta_koordinaatit(
                                   [y_1.get(), x_1.get(), y_2.get(), x_2.get()],
                                   3))
 
-        button_3.grid(row=1, column=2)
+        painike_3.grid(row=1, column=2)
 
-        button_dijkstra = ttk.Button(master=self._frame,
+        painike_dijkstra = ttk.Button(master=self._freimi,
                                      text="Dijkstra",
                                      command=lambda:
-                                     self.set_dijkstra([y_1.get(), x_1.get(), y_2.get(), x_2.get()],
-                                                       self.map))
+                                     self.aseta_dijkstra([y_1.get(), x_1.get(), y_2.get(), x_2.get()],
+                                                       self.kartta))
 
-        button_dijkstra.grid(row=2, column=0)
+        painike_dijkstra.grid(row=2, column=0)
 
-        button_ida = ttk.Button(master=self._frame,
+        painike_ida = ttk.Button(master=self._freimi,
                                 text="IDA-*",
                                 command=lambda:
                                 self.set_ida_star([y_1.get(), x_1.get(), y_2.get(), x_2.get()],
-                                                  self.map))
+                                                  self.kartta))
 
-        button_ida.grid(row=2, column=1)
+        painike_ida.grid(row=2, column=1)

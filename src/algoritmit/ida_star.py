@@ -76,7 +76,6 @@ class IdaStar:
         while True:
             ruudun_tila = self.etsi(start, 0, raja, fin)
             if ruudun_tila is True:
-                print(len(self.tarkastettu))
                 break
             if ruudun_tila >= 999:
                 return False
