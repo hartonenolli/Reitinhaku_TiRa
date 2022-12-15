@@ -38,7 +38,7 @@ class Dijkstra:
         self.koordinaatit = alku_loppu
         for y in range(len(self.kartta)):
             for x in range(len(self.kartta[0])):
-                if str(x) == self.koordinaatit[1] and str(y) == self.koordinaatit[0]:
+                if str(x) == self.koordinaatit[0] and str(y) == self.koordinaatit[1]:
                     self.ruudut[f"{x},{y}"] = 0
                     self.tee_naapuri(x, y)
                 elif self.kartta[y][x] != "p":
@@ -85,8 +85,8 @@ class Dijkstra:
         keko = Keko()
         polku = []
         keko.lisaa_kekoon(
-            (0, f"{self.koordinaatit[1]},{self.koordinaatit[0]}"))
-        maali = f"{self.koordinaatit[3]},{self.koordinaatit[2]}"
+            (0, f"{self.koordinaatit[0]},{self.koordinaatit[1]}"))
+        maali = f"{self.koordinaatit[2]},{self.koordinaatit[3]}"
         while keko.keko_rakenne != []:
             solmu = keko.poista_keosta()
             if solmu[1] in self.vierailtu:
@@ -122,9 +122,9 @@ class Dijkstra:
             for x in range(len(self.kartta[0])):
                 if self.kartta[y][x] == "p":
                     rivi += "p"
-                elif self.koordinaatit[1] == str(x) and self.koordinaatit[0] == str(y):
+                elif self.koordinaatit[0] == str(x) and self.koordinaatit[1] == str(y):
                     rivi += "o"
-                elif self.koordinaatit[3] == str(x) and self.koordinaatit[2] == str(y):
+                elif self.koordinaatit[2] == str(x) and self.koordinaatit[3] == str(y):
                     rivi += "o"
                 elif f"{x},{y}" in polku:
                     rivi += "r"

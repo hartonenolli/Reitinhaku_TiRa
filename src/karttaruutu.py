@@ -4,11 +4,11 @@
     Algoritmeja kutsutaan omista luokistaan.
 """
 
+import datetime
 from tkinter import ttk, constants, Canvas
 from kartat.kartta1 import Kartat
 from algoritmit.dijkstra import Dijkstra
 from algoritmit.ida_star import IdaStar
-import datetime
 
 
 class KarttaRuutu:
@@ -53,15 +53,16 @@ class KarttaRuutu:
             jos kartalla on 'p', niin tulee musta.
             Lisäksi, jos valkoisella on valittu alku koordinaatti,
             niin tulee sininen. Punainen tulee loppukoordinaatille.
+
         """
         nayta_kartta = Kartat().maps(self.kartta)
         if self.kanvas is not None:
             self.kanvas.after(0, self.kanvas.destroy())
         self.kanvas = Canvas(self._juuri, width=500, height=500)
-        if nayta_kartta[int(self.x_y_lista[0])][int(self.x_y_lista[1])] == "p":
+        if nayta_kartta[int(self.x_y_lista[1])][int(self.x_y_lista[0])] == "p":
             print("Alku ei ole oikein!")
             self._alusta()
-        elif nayta_kartta[int(self.x_y_lista[2])][int(self.x_y_lista[3])] == "p":
+        elif nayta_kartta[int(self.x_y_lista[3])][int(self.x_y_lista[2])] == "p":
             print("Loppu ei ole oikein!")
             self._alusta()
         elif self.dijkstra == 1:
@@ -103,11 +104,11 @@ class KarttaRuutu:
                     self.kanvas.create_rectangle(
                         j, i, j+mista, i+mista, fill="white")
                     if str(y_koordinaatti
-                           ) == self.x_y_lista[0] and str(x_koordinaatti) == self.x_y_lista[1]:
+                           ) == self.x_y_lista[1] and str(x_koordinaatti) == self.x_y_lista[0]:
                         self.kanvas.create_rectangle(
                             j, i, j+mista, i+mista, fill="blue")
                     if str(y_koordinaatti
-                           ) == self.x_y_lista[2] and str(x_koordinaatti) == self.x_y_lista[3]:
+                           ) == self.x_y_lista[3] and str(x_koordinaatti) == self.x_y_lista[2]:
                         self.kanvas.create_rectangle(
                             j, i, j+mista, i+mista, fill="red")
                 elif nayta_kartta[y_koordinaatti][x_koordinaatti] == "d":
@@ -120,11 +121,11 @@ class KarttaRuutu:
                     self.kanvas.create_rectangle(
                         j, i, j+mista, i+mista, fill="black")
                     if str(y_koordinaatti
-                           ) == self.x_y_lista[0] and str(x_koordinaatti) == self.x_y_lista[1]:
+                           ) == self.x_y_lista[1] and str(x_koordinaatti) == self.x_y_lista[0]:
                         self.kanvas.create_rectangle(
                             j, i, j+mista, i+mista, fill="grey")
                     if str(y_koordinaatti
-                           ) == self.x_y_lista[2] and str(x_koordinaatti) == self.x_y_lista[3]:
+                           ) == self.x_y_lista[3] and str(x_koordinaatti) == self.x_y_lista[2]:
                         self.kanvas.create_rectangle(
                             j, i, j+mista, i+mista, fill="grey")
                 x_koordinaatti += 1
@@ -140,56 +141,39 @@ class KarttaRuutu:
             Syötteet annetaan listana ja karttanumero kertoo
             kuinka iso syöte voi olla.
         """
+        vaara = "xyxy"
         if kartta_numero == 1:
-            if str(koordinaatit[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-                print("Huolitutu arvot 0-9, alku x väärin. Asetettu 0")
-                koordinaatit[1] = str(0)
-            if str(koordinaatit[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-                print("Huolitutu arvot 0-9, alku y väärin. Asetetu 0")
-                koordinaatit[0] = str(0)
-            if str(koordinaatit[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-                print("Huolitutu arvot 0-9, loppu x väärin. Asetettu 9")
-                koordinaatit[3] = str(9)
-            if str(koordinaatit[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-                print("Huolitutu arvot 0-9, loppu y väärin. Asetettu 9")
-                koordinaatit[2] = str(9)
+            hyvaksytyt = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+            for i, koordinaatti in enumerate(koordinaatit):
+                if koordinaatti not in hyvaksytyt and i < 2:
+                    print(f"Huolitutu arvot 0-9, alku {vaara[i]} väärin. Asetettu 0")
+                    koordinaatit[i] = str(0)
+                elif koordinaatti not in hyvaksytyt and i > 1:
+                    print(f"Huolitutu arvot 0-9, loppu {vaara[i]} väärin. Asetettu 9")
+                    koordinaatit[i] = str(9)
         elif kartta_numero == 2:
-            if str(koordinaatit[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                                          "10", "11", "12", "13", "14"]:
-                print("Huolitutu arvot 0-14, alku x väärin. Asetettu 0")
-                koordinaatit[1] = str(0)
-            if str(koordinaatit[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                                          "10", "11", "12", "13", "14"]:
-                print("Huolitutu arvot 0-14, alku y väärin. Asetetu 0")
-                koordinaatit[0] = str(0)
-            if str(koordinaatit[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                                          "10", "11", "12", "13", "14"]:
-                print("Huolitutu arvot 0-14, loppu x väärin. Asetettu 14")
-                koordinaatit[3] = str(14)
-            if str(koordinaatit[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                                          "10", "11", "12", "13", "14"]:
-                print("Huolitutu arvot 0-14, loppu y väärin. Asetettu 14")
-                koordinaatit[2] = str(14)
+            hyvaksytyt = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                            "10", "11", "12", "13", "14"]
+            for i, koordinaatti in enumerate(koordinaatit):
+                if koordinaatti not in hyvaksytyt and i < 2:
+                    print(f"Huolitutu arvot 0-14, alku {vaara[i]} väärin. Asetettu 0")
+                    koordinaatit[i] = str(0)
+                elif koordinaatti not in hyvaksytyt and i > 1:
+                    print(f"Huolitutu arvot 0-14, loppu {vaara[i]} väärin. Asetettu 14")
+                    koordinaatit[i] = str(14)
         else:
-            if str(koordinaatit[1]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                                          "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
-                print("Huolitutu arvot 0-19, alku x väärin. Asetettu 0")
-                koordinaatit[1] = str(0)
-            if str(koordinaatit[0]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                                          "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
-                print("Huolitutu arvot 0-19, alku y väärin. Asetetu 0")
-                koordinaatit[0] = str(0)
-            if str(koordinaatit[3]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                                          "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
-                print("Huolitutu arvot 0-19, loppu x väärin. Asetettu 19")
-                koordinaatit[3] = str(19)
-            if str(koordinaatit[2]) not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                                          "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
-                print("Huolitutu arvot 0-19, loppu y väärin. Asetettu 19")
-                koordinaatit[2] = str(19)
+            hyvaksytyt = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+                            "11", "12", "13", "14", "15", "16", "17", "18", "19"]
+            for i, koordinaatti in enumerate(koordinaatit):
+                if koordinaatti not in hyvaksytyt and i < 2:
+                    print(f"Huolitutu arvot 0-19, alku {vaara[i]} väärin. Asetettu 0")
+                    koordinaatit[i] = str(0)
+                elif koordinaatti not in hyvaksytyt and i > 1:
+                    print(f"Huolitutu arvot 0-19, loppu {vaara[i]} väärin. Asetettu 19")
+                    koordinaatit[i] = str(19)
         print("Valitut koordinaatit:")
-        print(f"Alku:  {koordinaatit[1]:2} {koordinaatit[0]}")
-        print(f"Loppu: {koordinaatit[3]:2} {koordinaatit[2]}")
+        print(f"Alku:  {koordinaatit[0]:2} {koordinaatit[1]}")
+        print(f"Loppu: {koordinaatit[2]:2} {koordinaatit[3]}")
         self.x_y_lista = koordinaatit
         self.kartta = kartta_numero
         self.aseta_koordinaatit_kanvakselle()
@@ -226,7 +210,7 @@ class KarttaRuutu:
             master=self._freimi,
             text="Kartta1",
             command=lambda: self._tarkasta_koordinaatit(
-                [y_1.get(), x_1.get(), y_2.get(), x_2.get()], 1)
+                [x_1.get(), y_1.get(), x_2.get(), y_2.get()], 1)
         )
 
         painike_1.grid(row=1, column=0)
@@ -235,7 +219,7 @@ class KarttaRuutu:
                                 text="Kartta2",
                                 command=lambda:
                                 self._tarkasta_koordinaatit(
-                                    [y_1.get(), x_1.get(), y_2.get(), x_2.get()],
+                                    [x_1.get(), y_1.get(), x_2.get(), y_2.get()],
                                     2))
 
         painike_2.grid(row=1, column=1)
@@ -244,23 +228,24 @@ class KarttaRuutu:
                               text="Kartta3",
                               command=lambda:
                               self._tarkasta_koordinaatit(
-                                  [y_1.get(), x_1.get(), y_2.get(), x_2.get()],
+                                  [x_1.get(), y_1.get(), x_2.get(), y_2.get()],
                                   3))
 
         painike_3.grid(row=1, column=2)
 
         painike_dijkstra = ttk.Button(master=self._freimi,
-                                     text="Dijkstra",
-                                     command=lambda:
-                                     self.aseta_dijkstra([y_1.get(), x_1.get(), y_2.get(), x_2.get()],
-                                                       self.kartta))
+                                    text="Dijkstra",
+                                    command=lambda:
+                                    self.aseta_dijkstra(
+                                        [x_1.get(), y_1.get(), x_2.get(), y_2.get()],
+                                        self.kartta))
 
         painike_dijkstra.grid(row=2, column=0)
 
         painike_ida = ttk.Button(master=self._freimi,
                                 text="IDA-*",
                                 command=lambda:
-                                self.set_ida_star([y_1.get(), x_1.get(), y_2.get(), x_2.get()],
+                                self.set_ida_star([x_1.get(), y_1.get(), x_2.get(), y_2.get()],
                                                   self.kartta))
 
         painike_ida.grid(row=2, column=1)

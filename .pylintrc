@@ -6,7 +6,9 @@ ignore=tests
 
 disable=missing-module-docstring,
         missing-function-docstring,
-        missing-class-docstring
+        missing-class-docstring,
+        consider-using-enumerate,
+        too-few-public-methods
 
 
 [SIMILARITIES]

@@ -68,8 +68,8 @@ class IdaStar:
             funktion arvo.
         """
         self.naapurit = naapureita
-        self.alku = f"{koordinaatti[1]},{koordinaatti[0]}"
-        self.loppu = f"{koordinaatti[3]},{koordinaatti[2]}"
+        self.alku = f"{koordinaatti[0]},{koordinaatti[1]}"
+        self.loppu = f"{koordinaatti[2]},{koordinaatti[3]}"
         start = self.alku
         fin = self.loppu
         raja = self.heurestinen_arvo(start, fin)
