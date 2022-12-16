@@ -8,16 +8,19 @@
 
 Tänne joku rakennekaavio
 
-## Saavutetut aikavaativuudet
+## Saavutetut aika- ja tilavaativuudet
 Dijkstran algoritmin saavutetut aikavaativuudet:
 - Algoritmi käy läpi ruudut ja niiden naapurit, eli solmut. Tämä tapahtuu ajassa O(n+m), jossa n on ruutujen määrä ja m solmujen
-- Keosta saamme pienimmän alkion pois ajassa O(1). Poistaminen ja lisääminen vie aikaa O(log n)
+- Keosta saamme pienimmän alkion pois ajassa O(1). Poistamisen jälkeinen järjestäminen ja lisääminen vie aikaa O(log n)
 - Näistä saamme kokonaisaikavaativuudeksi O(n+m log n)
 
+Dijkstran algoritmin tilavaativuus on O(n+m). Algoritmi ylläpitää muistissa ruutuja, jotka lisätään listaan. Pahimmassa tapauksessa kaikki ruudut joudutaan lisäämään muistiin.
+
 IDA-* algoritmin saavutetut aikavaativuudet:
-- Jotain
-- muuta
-- emt
+- Aikavaativuus on riippuvainen asia ruutujen naapureiden määrästä, esteistä reitillä ja heurestisen arvon laskemisesta. Aikavaativuutta on yleiseti pidetty olevan O(b^d), jossa b on haarautuvuuden määrä (kuinka monta naapuria ruudulla on) ja d on ensimmäisen löytyneen polun pituus.
+- Heurestinen arvon laskutapa aiheuttaa IDA-* algoritmille vaikeuksia oikealta vasemmalle liikkumisessa. Esimerkkinä tästä reitti, jonka pituus on 45 ruutua kartta3, jossa on koordinaatit alulle 0,6 ja lopulle 14,17 löytyy ajassa 3,45s. Jos koordinaatit laittaa alulle ja lopulle toisin päin, niin reitti löytyy ajassa 46,42s.
+
+IDA-* algoritmin tilavaativuus on O(d), jossa d on lyhyimmän polun etäisyys alkuruudusta loppuruutuun.
 
 # Suorituskykyvertailut
 
@@ -69,4 +72,4 @@ Pythonin oma kekorakenne on keskimäärin 2 sekunnin tuhannesosaa nopeampi löyt
 - Miten voisi hioa
 
 # Lähteet
-Tirakirja, wikipediat, IDA-* omat sivut
+Tirakirja, wikipediat, [IDA-* aikavaativuus](https://stackoverflow.com/questions/54490981/artificial-intelligence-time-complexity-of-ida-search) omat sivut
