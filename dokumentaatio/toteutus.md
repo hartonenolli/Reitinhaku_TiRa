@@ -6,7 +6,27 @@
    - Ohjelma asettaa itse puuttuvat arvot tai väärät arvot oletuskohtiin
 - Karttaruutu kutsuu *algoritmit* kansiossa olevia algoritmeja. Myös *kartat* kansiosta haetaan käytettävät kartat sovellukselle.
 
-Tänne joku rakennekaavio
+# Ohjelman rakenne:
+
+      .
+      ├── dokumentaatio
+      ├── README.md
+      ├── src
+      │   ├── algoritmit
+      │   │   ├── dijkstra.py
+      │   │   └── ida_star.py
+      │   ├── kartat
+      │   │   └── kartta1.py
+      │   ├── karttaruutu.py
+      │   ├── kayttoliittyma.py
+      │   ├── kekokansio
+      │   │   └── keko.py
+      │   └── tests
+      │       ├── dijkstra_test.py
+      │       ├── ida_test.py
+      │       └── test_assets
+      │           └── d_assets.py
+      └── tasks.py
 
 ## Saavutetut aika- ja tilavaativuudet
 Dijkstran algoritmin saavutetut aikavaativuudet:
@@ -85,4 +105,4 @@ Pythonin oma kekorakenne on keskimäärin 2 sekunnin tuhannesosaa nopeampi löyt
 
 [IDA-* algoritmi 2](https://algorithmsinsight.wordpress.com/graph-theory-2/ida-star-algorithm-in-general/)
 
-[IDA-* aikavaativuus](https://stackoverflow.com/questions/54490981/artificial-intelligence-time-complexity-of-ida-search) omat sivut
+[IDA-* aikavaativuus](https://stackoverflow.com/questions/54490981/artificial-intelligence-time-complexity-of-ida-search)
