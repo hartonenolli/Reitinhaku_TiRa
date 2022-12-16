@@ -6,7 +6,7 @@
 
 # Testaus toteutus
 
-Automaattisia testejä tehty algoritmeihin. Kekorakenne testaantuu dijkstran algoritmin testejen avulla. On pyritty saamaan poikkeavia syötteitä testeille.
+Automaattisia testejä tehty algoritmeihin. Kekorakenne testaantuu suurelta osin dijkstran algoritmin testejen avulla. On pyritty saamaan poikkeavia syötteitä testeille.
 
 Lisätty github action, jolla varmistettu testien toimivuus jokaisen pushauksen jälkeen.
 
