@@ -2,7 +2,7 @@
 
 ## Testaustilanne
 
-![coveragekuva](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/kuvat/coveragekuva.png)
+![coveragekuva](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/kuvat/coverage_kuva.png)
 
 # Testaus toteutus
 
