@@ -83,3 +83,19 @@
 ## 9.12
 - 3h
 - Tehty kekorakenne Dijkstran algoritmille ja pylint taso nostettu yli 9.5
+
+## 10.12
+- 1h
+- Dokumentaatiota siistitty
+
+## 13.12
+- 1h
+- Käyttöliittymän parantelua ja kommentointia
+
+## 15.12
+- 1h
+- Pylint tuloksen parannusta
+
+## 16.12
+- 3h
+- Dokumentaation parantelua, algoritmien testausta
