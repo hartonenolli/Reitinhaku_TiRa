@@ -52,13 +52,15 @@ Kartta2 on 15x15 kertaa ruudukko. Taulukossa tulokset:
 | 7,0    6,14   | 25            | 0,0028s            | 0,0028s            | 0,0026s            |
 
 # Kartta3
-Kartta3 on 20x20 kertaa ruudukko. Taulukossa tulokset:
+Kartta3 on 20x20 kertaa ruudukko. *Kaksi viimeistä riviä näyttää IDA-* algoritmin vaikeudet isoissa reiteissä ja vasemmalta oikealle mentävissä hauissa. Tähän vaikuttaa myös esteiden sijoittelu.* Taulukossa tulokset:
 | KOORDINAATIT  | REITIN PITUUS | DIJKSTRA (oma keko)| IDA-*              | DIJKSTRA (python)  |
 | ------------- |:-------------:| :-----------------:| :-----------------:| :-----------------:|
 | 0,0   19,19   | 40            | 0,0055s            | 0,0992s            | 0,0055s            |
 | 0,19  19,0    | 42            | 0,0053s            | 0,1008s            | 0,0053s            |
 | 0,9   19,9    | 27            | 0,0058s            | 0,0042s            | 0,0056s            |
 | 9,0    9,19   | 39            | 0,0056s            | 0,3512s            | 0,0053s            |
+| 0,6   14,17   | 45            | 0,0059s            | 3,4609s            | 0,0057s            |
+| 14,17  0,6    | 45            | 0,0058s            | 46,3356s           | 0,0057s            |
 
 ## Huomioita taulukosta
 
@@ -69,7 +71,18 @@ Kuitenkin huomataan taulukoista reitit, jossa pituus on noin 40-ruuta on IDA-* a
 Pythonin oma kekorakenne on keskimäärin 2 sekunnin tuhannesosaa nopeampi löytämään reitin, kuin oma tekemä kekorakenne. Tämä johtunee siitä, että kekorakenne on optimoitu hyvin tarkkaan.
 
 # Puutteet ja parannusehdotukset
-- Miten voisi hioa
+- Käyttöliittymää voisi tehdä paremmaksi. Se on nyt ihan toimiva, mutta tällä hetkellä reitin löytymiseen liittyvät tiedot (pituus ja aika) tulostetaan terminaalissa. Ihan toimiva tapa, mutta kaikki tieto käyttöliittymässä olisi tietydti mieluisampaa..
+- Testit voisivat olla vielä kattavampia
 
 # Lähteet
-Tirakirja, wikipediat, [IDA-* aikavaativuus](https://stackoverflow.com/questions/54490981/artificial-intelligence-time-complexity-of-ida-search) omat sivut
+[Tirakirja](https://www.cs.helsinki.fi/u/ahslaaks/tirakirja/)
+
+[Dijkstran algoritmi](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+
+[Dijkstran algoritmi 2](https://www.udacity.com/blog/2021/10/implementing-dijkstras-algorithm-in-python.html)
+
+[IDA-* algoritmi](https://en.wikipedia.org/wiki/Iterative_deepening_A*)
+
+[IDA-* algoritmi 2](https://algorithmsinsight.wordpress.com/graph-theory-2/ida-star-algorithm-in-general/)
+
+[IDA-* aikavaativuus](https://stackoverflow.com/questions/54490981/artificial-intelligence-time-complexity-of-ida-search) omat sivut
