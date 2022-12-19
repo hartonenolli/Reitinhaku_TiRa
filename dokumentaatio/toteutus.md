@@ -72,7 +72,7 @@ Kartta2 on 15x15 kertaa ruudukko. Taulukossa tulokset:
 | 7,0    6,14   | 25            | 0,0028s            | 0,0028s            | 0,0026s            |
 
 # Kartta3
-Kartta3 on 20x20 kertaa ruudukko. *Kaksi viimeistä riviä näyttää IDA-* algoritmin vaikeudet isoissa reiteissä ja vasemmalta oikealle mentävissä hauissa. Tähän vaikuttaa myös esteiden sijoittelu.* Taulukossa tulokset:
+Kartta3 on 20x20 kertaa ruudukko. Kaksi viimeistä riviä näyttää IDA-* algoritmin vaikeudet isoissa reiteissä ja vasemmalta oikealle mentävissä hauissa. Tähän vaikuttaa myös esteiden sijoittelu. Taulukossa tulokset:
 | KOORDINAATIT  | REITIN PITUUS | DIJKSTRA (oma keko)| IDA-*              | DIJKSTRA (python)  |
 | ------------- |:-------------:| :-----------------:| :-----------------:| :-----------------:|
 | 0,0   19,19   | 40            | 0,0055s            | 0,0992s            | 0,0055s            |
