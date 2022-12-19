@@ -36,11 +36,13 @@ class Keko:
         kohta = len(self.keko_rakenne)
         self.keko_rakenne.append(ruutu)
         vanhempi = self.keko_rakenne[kohta//2]
-        while vanhempi[0] > ruutu[0]:
+        while vanhempi[0] >= ruutu[0]:
             self.keko_rakenne[kohta] = vanhempi
             self.keko_rakenne[kohta//2] = ruutu
             kohta = kohta//2
             vanhempi = self.keko_rakenne[kohta//2]
+            if kohta == 0:
+                break
 
         return self.keko_rakenne
 
