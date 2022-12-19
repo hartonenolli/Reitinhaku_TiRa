@@ -92,7 +92,7 @@ Pythonin oma kekorakenne on keskimäärin 2 sekunnin tuhannesosaa nopeampi löyt
 
 # Puutteet ja parannusehdotukset
 - Käyttöliittymää voisi tehdä paremmaksi. Se on nyt ihan toimiva, mutta tällä hetkellä reitin löytymiseen liittyvät tiedot (pituus ja aika) tulostetaan terminaalissa. Ihan toimiva tapa, mutta kaikki tieto käyttöliittymässä olisi tietydti mieluisampaa..
-- Testit voisivat olla vielä kattavampia
+- Ohjelmassa on oletusarvona, että reitti on aina olemassa
 
 # Lähteet
 [Tirakirja](https://www.cs.helsinki.fi/u/ahslaaks/tirakirja/)
