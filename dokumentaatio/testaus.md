@@ -20,3 +20,20 @@ Automaattiset testit antoivat varmuuden ohjelman perustoiminnon jatkuvasta toimi
 
 Manuaalisesta testauksesta oli usein hyötyä. Sen ansiosta löysin ohjelmasta bugin, jossa dijkstran algoritmi ei löytänytkään lyhintä reittiä etsiessä oikealta vasemmalle. Sain selvitettyä vian olevan kekorakenteessa uuden alkion lisäyksessä.
 
+# Empiirinen testaus
+
+## Kartta1 10x10
+
+![Kartta1](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/kuvat/kartta1_tulokset.png)
+
+## Kartta2 15x15
+
+![Kartta2](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/kuvat/kartta2_tulokset.png)
+
+## Kartta3 20x20
+
+![Kartta3](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/kuvat/kartta3_tulokset.png)
+
+## Graafeista
+
+Graafeista näkee, kuinka Dijkstran algoritmi toimii tasaisesti jokaisessa kartassa ja reitin pituudella ei juurikaan ole merkitystä. IDA-* algoritmi toimii tehokkaasti, kun reitin pituus ei ole kovin iso ja esteet on sijoiteltu suotuisasti. Ongelmia IDA-* algoritmilla on ollut kartta3, koska reittien pituus on kasvanut suureksi ja esteet ovat sijoiteltu reitille algoritmille epäsuopuisasti.
