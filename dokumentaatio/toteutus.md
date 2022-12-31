@@ -86,11 +86,13 @@ Kartta3 on 20x20 kertaa ruudukko. Kaksi viimeistä riviä näyttää IDA-* algor
 
 IDA-* algoritmi toimii tehokkaasti tai tehokkaammin, kuin Dijkstran algoritmi, kun reitin pituus on noin 25 ruutua. Tähän vaikuttaa paljon myös kartan esteiden sijoittelu. Kartta 1 ja 2 IDA-* toimii oikein tehokkaasti poislukien vasemmasta alakulmasta oikeaan yläkulmaan etsitty reitti. Tähän on vaikuttanut reitin pituus ja kastan esteiden sijoittelu. Jouduin muokkaamaan erityiseti kartta3 paljon, jotta sain IDA-* algoritmia mitattua kunnolla. Reitin pituuden ollessa lähemmäs 50 ruutua oli IDA-* algorimi niin hidas, ettei sitä jaksanut jäädä odottelemaan. Erityinen huomio kartta3 etsityt reitit taulukon kahdella viimeisellä rivillä. Alla kuva kartasta:
 
+![Kartta3](https://github.com/hartonenolli/Reitinhaku_TiRa/blob/master/dokumentaatio/kuvat/kartta3_kuva.png)
 
+Reitin hakuun sinisestä ruudusta punaiseen meni IDA-* algoritmilla 46s. Toisin päin hakuun menee vain 3,4s. Tämä johtuu pääsääntöisesti esteiden sijoittelusta kartalla. Kuvassa näkyy pitkä seinä maalin vieressä. Luulen tämän aiheuttavan niin suuren eron reitin haun tehokkuudessa.
 
-Kuitenkin huomataan taulukoista reitit, jossa pituus on noin 40-ruuta on IDA-* algoritmi huomattavasti hitaampi.
+Taulukoista näkee IDA-* algoritmin olevan hitaampi, kun reitin pituus on noin 40-ruuta.
 
-Pythonin oma kekorakenne on keskimäärin 2 sekunnin tuhannesosaa nopeampi löytämään reitin, kuin oma tekemä kekorakenne. Tämä johtunee siitä, että kekorakenne on optimoitu hyvin tarkkaan.
+Pythonin oma kekorakenne on noin 15-20% nopeampi löytämään reitin, kuin oma tekemä kekorakenne. Tämä johtunee siitä, että kekorakenne on optimoitu hyvin tarkkaan.
 
 # Puutteet ja parannusehdotukset
 - Käyttöliittymää voisi tehdä paremmaksi. Se on nyt ihan toimiva, mutta tällä hetkellä reitin löytymiseen liittyvät tiedot (pituus ja aika) tulostetaan terminaalissa. Ihan toimiva tapa, mutta kaikki tieto käyttöliittymässä olisi tietydti mieluisampaa..
