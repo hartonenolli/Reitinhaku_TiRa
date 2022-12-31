@@ -51,40 +51,42 @@ Suorituskykyvertailussa on tarkasteltu seuraavia algoritmeja:
 
 Suorituskykyä on mitattu sekunneissa *4 desimaalin* tarkkuudella. Aika alkaa, kun kutsutaan algoritmiluokkia ja päättyy, kun kaikki toimenpiteet on saatu valmiiksi luokissa.
 
-Kerätty taulukko, jossa on valittu 4 eri reittiä jokaisesta kartasta. Otettu **5 hakukerran keskiarvo** siitä, kuinka kauan algoritmilla kestänyt löytää reitti.
+Kerätty taulukko, jossa on valittu 4 eri reittiä jokaisesta kartasta. Otettu **20 hakukerran keskiarvo** siitä, kuinka kauan algoritmilla kestänyt löytää reitti.
 
 # Kartta1
 Kartta1 on 10x10 kertaa ruudukko. Taulukossa tulokset:
 | KOORDINAATIT  | REITIN PITUUS | DIJKSTRA (oma keko)| IDA-*              | DIJKSTRA (python)  |
 | ------------- |:-------------:| :-----------------:| :-----------------:| :-----------------:|
-| 0,0    9,9    | 18            | 0,0017s            | 0,0013s            | 0,0015s            |
-| 0,9    9,0    | 18            | 0,0017s            | 0,0015s            | 0,0015s            |
-| 0,4    9,4    | 11            | 0,0017s            | 0,0012s            | 0,0014s            |
-| 4,0    4,9    | 15            | 0,0016s            | 0,0015s            | 0,0016s            |
+| 0,0    9,9    | 18            | 0,0018s            | 0,0013s            | 0,0015s            |
+| 0,9    9,0    | 18            | 0,0017s            | 0,0015s            | 0,0014s            |
+| 0,4    9,4    | 11            | 0,0017s            | 0,0013s            | 0,0014s            |
+| 4,0    4,9    | 15            | 0,0017s            | 0,0015s            | 0,0016s            |
 
 # Kartta2
 Kartta2 on 15x15 kertaa ruudukko. Taulukossa tulokset:
 | KOORDINAATIT  | REITIN PITUUS | DIJKSTRA (oma keko)| IDA-*              | DIJKSTRA (python)  |
 | ------------- |:-------------:| :-----------------:| :-----------------:| :-----------------:|
 | 0,0   14,14   | 24            | 0,0028s            | 0,0019s            | 0,0026s            |
-| 0,14  14,0    | 40            | 0,0027s            | 0,0090s            | 0,0025s            |
-| 0,6   14,6    | 20            | 0,0029s            | 0,0021s            | 0,0026s            |
+| 0,14  14,0    | 40            | 0,0029s            | 0,0090s            | 0,0024s            |
+| 0,6   14,6    | 20            | 0,0029s            | 0,0021s            | 0,0025s            |
 | 7,0    6,14   | 25            | 0,0028s            | 0,0028s            | 0,0026s            |
 
 # Kartta3
 Kartta3 on 20x20 kertaa ruudukko. Kaksi viimeistä riviä näyttää IDA-* algoritmin vaikeudet isoissa reiteissä ja vasemmalta oikealle mentävissä hauissa. Tähän vaikuttaa myös esteiden sijoittelu. Taulukossa tulokset:
 | KOORDINAATIT  | REITIN PITUUS | DIJKSTRA (oma keko)| IDA-*              | DIJKSTRA (python)  |
 | ------------- |:-------------:| :-----------------:| :-----------------:| :-----------------:|
-| 0,0   19,19   | 40            | 0,0055s            | 0,0992s            | 0,0055s            |
-| 0,19  19,0    | 42            | 0,0053s            | 0,1008s            | 0,0053s            |
-| 0,9   19,9    | 27            | 0,0058s            | 0,0042s            | 0,0056s            |
+| 0,0   19,19   | 40            | 0,0057s            | 0,0992s            | 0,0053s            |
+| 0,19  19,0    | 42            | 0,0055s            | 0,1008s            | 0,0052s            |
+| 0,9   19,9    | 27            | 0,0058s            | 0,0042s            | 0,0055s            |
 | 9,0    9,19   | 39            | 0,0056s            | 0,3512s            | 0,0053s            |
-| 0,6   14,17   | 45            | 0,0059s            | 3,4609s            | 0,0057s            |
-| 14,17  0,6    | 45            | 0,0058s            | 46,3356s           | 0,0057s            |
+| 0,6   14,17   | 45            | 0,0059s            | 3,4609s            | 0,0055s            |
+| 14,17  0,6    | 45            | 0,0059s            | 46,3356s           | 0,0057s            |
 
-## Huomioita taulukosta
+## Johtopäätökset testeistä
 
-IDA-* algoritmi toimii tehokkaasti tai tehokkaammin, kuin Dijkstran algoritmi, kun reitin pituus on noin 25 ruutua. Tähän vaikuttaa paljon myös kartan esteiden sijoittelu. Jouduin muokkaamaan erityiseti kartta3 paljon, jotta sain IDA-* algoritmia mitattua kunnolla. Reitin pituuden ollessa lähemmäs 50 ruutua oli IDA-* algorimi niin hidas, ettei sitä jaksanut jäädä odottelemaan.
+IDA-* algoritmi toimii tehokkaasti tai tehokkaammin, kuin Dijkstran algoritmi, kun reitin pituus on noin 25 ruutua. Tähän vaikuttaa paljon myös kartan esteiden sijoittelu. Kartta 1 ja 2 IDA-* toimii oikein tehokkaasti poislukien vasemmasta alakulmasta oikeaan yläkulmaan etsitty reitti. Tähän on vaikuttanut reitin pituus ja kastan esteiden sijoittelu. Jouduin muokkaamaan erityiseti kartta3 paljon, jotta sain IDA-* algoritmia mitattua kunnolla. Reitin pituuden ollessa lähemmäs 50 ruutua oli IDA-* algorimi niin hidas, ettei sitä jaksanut jäädä odottelemaan. Erityinen huomio kartta3 etsityt reitit taulukon kahdella viimeisellä rivillä. Alla kuva kartasta:
+
+
 
 Kuitenkin huomataan taulukoista reitit, jossa pituus on noin 40-ruuta on IDA-* algoritmi huomattavasti hitaampi.
 
@@ -93,6 +95,7 @@ Pythonin oma kekorakenne on keskimäärin 2 sekunnin tuhannesosaa nopeampi löyt
 # Puutteet ja parannusehdotukset
 - Käyttöliittymää voisi tehdä paremmaksi. Se on nyt ihan toimiva, mutta tällä hetkellä reitin löytymiseen liittyvät tiedot (pituus ja aika) tulostetaan terminaalissa. Ihan toimiva tapa, mutta kaikki tieto käyttöliittymässä olisi tietydti mieluisampaa..
 - Ohjelmassa on oletusarvona, että reitti on aina olemassa
+- Koska valitsin että reitinhaku tapahtuisi "kaupunkimaisessa" ympäristössä, niin lyhin reitti on löydetty kulkemalla vain vaaka- ja pystysuunnassa. Tätä voisi toki kehittää, että reitillä voisi kulkea myös vinottain.
 
 # Lähteet
 [Tirakirja](https://www.cs.helsinki.fi/u/ahslaaks/tirakirja/)
